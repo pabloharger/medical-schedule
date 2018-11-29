@@ -58,7 +58,6 @@ $app->post('/schedule/delete', function(){
 });
 
 $app->post('/schedule/refresh', function(){
-
 	if (isset($_POST['id']) || (int)$_POST['id'] > 0){
 		$schedule = new Schedule();
 		$schedule->get((int)$_POST['id']);

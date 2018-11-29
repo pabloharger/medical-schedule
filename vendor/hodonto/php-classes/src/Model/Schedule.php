@@ -47,6 +47,10 @@ use \HOdonto\Model;
 				}
 			}
 
+			if ((int)$idSchedule > 0 && count($results) > 0) {
+				$this->setData($results[0]);
+			}
+
 			return $result;
 		}
 

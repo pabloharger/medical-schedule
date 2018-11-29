@@ -10,6 +10,7 @@
     var $inpTimeFinal = $('[data-js="schedule-inp-date-final"]');
     var $inpObservation = $('[data-js="schedule-inp-obs"]');
     var $formAdd = $('[data-js="schedule-form-add"]');
+    var $btnDel = $('[data-js="schedule-dialog-del"]');
 
     function init(){
       initComponents();
@@ -115,7 +116,8 @@
       $inpTimeInit.datetimepicker({
         format: 'dd/mm/yyyy hh:ii',
         autoclose: true,
-        todayBtn: true
+        todayBtn: true,
+        readOnly: true
       });
 
       $inpTimeFinal.datetimepicker({
@@ -127,7 +129,7 @@
 
     function initEvents(){
       $('[data-js="schedule-dialog-add"]').on('click', addDialog);
-      $('[data-js="schedule-dialog-del"]').on('click', delDialog);
+      $btnDel.on('click', delDialog);
     }
 
     function addDialog(){
@@ -290,6 +292,7 @@
 
     function scheduleDayClickHandler(date, jsEvent, view) {
       clearDialog();
+      $btnDel.hide();
       $scheduleDialog.modal();
     }
 
@@ -301,6 +304,7 @@
 
     function scheduleClickHandler(calEvent){
       fillDialog(calEvent.id);
+      $btnDel.show();
       $scheduleDialog.modal();
     }
 
@@ -318,7 +322,8 @@
             $inpId.val(result.id);
             utilForm.setSelect2($selDentist, result.id_dentist, result.name_dentist);
             utilForm.setSelect2($selPatient, result.id_patient, result.name_patient);
-            $inpTimeInit.val(utilMoment.getInterfaceFormatedDateTime(result.date_time_begin));
+            $inpTimeInit.val(result.date_time_begin);
+            //$inpTimeInit.val(utilMoment.getInterfaceFormatedDateTime(result.date_time_begin));
             $inpTimeFinal.val(utilMoment.getInterfaceFormatedDateTime(result.date_time_end));
             $inpObservation.val(result.observation);
             $scheduleDialog.modal();
@@ -331,31 +336,12 @@
       );
     }
 
-    function scheduleRedizeHandler(event, delta, revertFunc){
+    function scheduleRedizeHandler(event){
       refreshSchedule(event.id, event.start.format(), event.end.format());
-      //addSchedule
-      /*if (($hsCadAgendamentoConfirmaAlteracao == false) || confirm("Deseja realmente alterar o horário do agendamento?")) {
-        hsCadAgendamento_AtualizaAgendaemnto(event.id
-                            ,event.start.format()
-                          ,event.end.format()
-                          );
-      } else {
-        revertFunc();
-      }*/
     }
 
-    function scheduleEventDropHandler(){
+    function scheduleEventDropHandler(event){
       refreshSchedule(event.id, event.start.format(), event.end.format());
-      /*
-      if (($hsCadAgendamentoConfirmaAlteracao == false) || confirm("Deseja realmente alterar o horário do agendamento?")) {
-            hsCadAgendamento_AtualizaAgendaemnto(event.id
-                               ,event.start.format()
-                              ,event.end.format()
-                              );
-            } else {
-            revertFunc();
-          }
-      */
     }
 
     function refreshSchedule($id, $initDateTime, $finalDateTime){

@@ -14,6 +14,11 @@
         "slim/slim":"2.0",
         "rain/raintpl":"3.0.0"        
     },
+    "scripts": {
+        "update-assets": "php composer.php update-assets",
+        "post-update-cmd": "php composer.php post-update-cmd",
+        "post-install-cmd": "php composer.php post-install-cmd"
+    },
     "autoload": {
         "psr-4": {
             "HOdonto\\": "vendor\\hodonto\\php-classes\\src"
