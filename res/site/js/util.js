@@ -40,11 +40,14 @@
         }
 
         function addCtrlShortCutGen(key, propagate, callBack){
+            // Mac OSx
             addShortCut(
                 'Meta+' + key.toUpperCase(),
                 propagate,
                 callBack
             );
+
+            // Windows
             addShortCut(
                 'Ctrl+' + key,
                 propagate,
@@ -79,10 +82,10 @@
     var utilMoment = (function utilMomentController(){
         return {
             getInternalFormatedDateTime: function getInternalFormatedDateTime(date){
-                return moment(date, 'DD/MM/YYYY HH:mm:SS').format('YYYY-MM-DD HH:mm:ss');
+                return moment(date, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm');
             },
             getInterfaceFormatedDateTime: function getInternalFormatedDateTime(date){
-                return moment(date, 'YYYY-MM-DD HH:mm:ss').format('DD/MM/YYYY HH:mm:SS');
+                return moment(date, 'YYYY-MM-DD HH:mm').format('DD/MM/YYYY HH:mm');
             }
         }
     })();

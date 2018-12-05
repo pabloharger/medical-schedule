@@ -322,8 +322,7 @@
             $inpId.val(result.id);
             utilForm.setSelect2($selDentist, result.id_dentist, result.name_dentist);
             utilForm.setSelect2($selPatient, result.id_patient, result.name_patient);
-            $inpTimeInit.val(result.date_time_begin);
-            //$inpTimeInit.val(utilMoment.getInterfaceFormatedDateTime(result.date_time_begin));
+            $inpTimeInit.val(utilMoment.getInterfaceFormatedDateTime(result.date_time_begin));
             $inpTimeFinal.val(utilMoment.getInterfaceFormatedDateTime(result.date_time_end));
             $inpObservation.val(result.observation);
             $scheduleDialog.modal();

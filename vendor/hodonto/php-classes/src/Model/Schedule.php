@@ -105,47 +105,6 @@ use \HOdonto\Model;
 				':id'=>$idSchedule
 			));
 		}
-/*
-id
-id_dentist
-id_patient
-date_time_begin
-date_time_end
-observation
-
-    
-	function save(){
-
-
-				$data = array();
-				$data['code'] = 0;
-                $data['message'] = '';
-                $data['data'] = [];
-
-                $schedule = Pojoschedule::getInstance();
-                $schedule->beginTransaction();
-
-				$schedule->findId($id, false);
-				$schedule->setid($id);
-                $schedule->setid_dentist($id_dentist);
-                $schedule->setid_patient($id_patient);
-				$schedule->setdate_time_begin($date_time_begin);
-                $schedule->setdate_time_end($date_time_end);
-                $schedule->setobservation($observation);
-				if ($schedule->getFind()){
-					$schedule->update();
-				} else {
-					$schedule->insert();
-                }
-                
-                $schedule->endTransaction();
-	
-				$data['message'] = 'Schedule saved!';
-				$data['data'][0]['id'] = $schedule->getid();
-    }
-*/
-
-
 	}
 
 ?>
