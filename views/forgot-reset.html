@@ -1,0 +1,31 @@
+<div class="py-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">Redefine your password<br></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                        	<form action="/forgot/reset" method="POST" data-js="login-form-main">
+												<div class="form-group">
+		                      						<label>Password</label>
+                                                    <input type="hidden" name="code" value="{$code}">
+		                      						<input type="password" class="form-control register-input" placeholder="Password" data-js="register-inp-password" name="password">
+		                      						<div class="invalid-feedback"> This field is required. </div>
+		                    					</div>
+		                    					<button class="btn btn-success" data-js="forgot-btn-save">Save <br></button>
+		                    				</form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

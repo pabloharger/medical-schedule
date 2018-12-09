@@ -135,6 +135,7 @@
     function addDialog(){
       if (validateData()){
         addSchedule();
+        clearDialog();
       } else {
         utilForm.focusInvalidElement($formAdd);
       }
@@ -145,7 +146,7 @@
         $.post( 
           'schedule/delete',
           {
-            id : Number($inpId.val())
+            id_schedule : Number($inpId.val())
           },
           function( data ) {
             var result = JSON.parse(data);
@@ -222,7 +223,7 @@
       $.post( 
         'schedule/save',
         {
-          id : Number($inpId.val()),
+          id_schedule : Number($inpId.val()),
           id_dentist : $selDentist.val(),
           id_patient : $selPatient.val(),
           date_time_begin : utilMoment.getInternalFormatedDateTime($inpTimeInit.val()),
@@ -233,7 +234,7 @@
           var result = JSON.parse(data);
           if (result.code === 0) {
             //loading_off();
-            $inpId.val(result.id);
+            $inpId.val(result.id_schedule);
             addCalendarSchedule(
               Number($inpId.val()),
               $selDentist.children()[0].innerText,
@@ -260,7 +261,7 @@
           //loading_off();
           result.forEach(function(curVal){
             addCalendarSchedule(
-              Number(curVal.id),
+              Number(curVal.id_schedule),
               curVal.name_dentist,
               curVal.name_patient,
               curVal.date_time_begin,
@@ -272,13 +273,13 @@
       );
     }
 
-    function addCalendarSchedule(id, nameDentist, namePatient, start, end, observation){
+    function addCalendarSchedule(id_schedule, nameDentist, namePatient, start, end, observation){
       $schedule.fullCalendar('removeEvents', [ Number( $inpId.val() ) ] );
       $schedule.fullCalendar(
         'addEventSource',
         [
           {
-            id : id,
+            id : id_schedule,
             title : 
               'Dr. ' + nameDentist + '\n' + 
               namePatient  + '\n' + 
@@ -308,18 +309,18 @@
       $scheduleDialog.modal();
     }
 
-    function fillDialog(id){
+    function fillDialog(id_schedule){
       $.post( 
         'schedule/get',
         {
-          id : id,
+          id_schedule : id_schedule,
         },
         function( data ) {
           var result = JSON.parse(data);
           if (result.length > 0) {
             result = result[0];
             //loading_off();
-            $inpId.val(result.id);
+            $inpId.val(result.id_schedule);
             utilForm.setSelect2($selDentist, result.id_dentist, result.name_dentist);
             utilForm.setSelect2($selPatient, result.id_patient, result.name_patient);
             $inpTimeInit.val(utilMoment.getInterfaceFormatedDateTime(result.date_time_begin));
@@ -343,11 +344,11 @@
       refreshSchedule(event.id, event.start.format(), event.end.format());
     }
 
-    function refreshSchedule($id, $initDateTime, $finalDateTime){
+    function refreshSchedule($id_schedule, $initDateTime, $finalDateTime){
       $.post( 
         'schedule/refresh',
         {
-          id : Number($id),
+          id_schedule : Number($id_schedule),
           date_time_begin : $initDateTime,
           date_time_end : $finalDateTime
         },

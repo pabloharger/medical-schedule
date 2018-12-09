@@ -113,7 +113,7 @@
 				$.post( 
 					'/dentist/save',
 					{
-						id : Number($selDentist.val()),
+						id_dentist : Number($selDentist.val()),
 						name : $inpName.val(),
 						doc_number : $inpDocNumber.val()
 					},
@@ -122,7 +122,7 @@
 						if (result.code === 0) {
                             //loading_off();
 							util.message(appDescription, result.message, 0);
-							setSelectDentist(result.id, $inpName.val());
+							setSelectDentist(result.id_dentist, $inpName.val());
 							enableControls(true, false);
 						} else {
 							//loading_off();
@@ -141,7 +141,7 @@
 				$.post(
 					'/dentist/delete',
 					{
-						id : Number($selDentist.val())
+						id_dentist : Number($selDentist.val())
 					},
 					function( data ) {
 						var result = JSON.parse(data);
@@ -162,14 +162,14 @@
             var idDentist = Number($selDentist.val());
             
             if (idDentist === 0){
-                util.message(appName, "You didn't select a dentist!");
+                util.message(appDescription, "You didn't select a dentist!");
 			} else {
 				//loading_on();
 				$.post(
 					//'controller/dentist.php',
 					'/dentist/find',
 					{
-						id : idDentist
+						id_dentist : idDentist
 					},
 					function( data ) {
                         var result = JSON.parse(data);
@@ -179,7 +179,7 @@
 							enableControls(true, false);
 						} else {
 							//loading_off();
-							util.message(appName, result.message, 1);
+							util.message(appDescription, result.message, 1);
 						}
 						//loading_off();
 					}

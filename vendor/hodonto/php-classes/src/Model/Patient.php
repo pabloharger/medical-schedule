@@ -15,7 +15,7 @@ use \HOdonto\Model;
 
 			$sql = new Sql();
 			$results = $sql->select('
-				SELECT p.id, p.name
+				SELECT p.id_patient, p.name
 				FROM tb_patients p
 				WHERE UPPER(p.name) LIKE :name
 			', Array(
@@ -29,7 +29,7 @@ use \HOdonto\Model;
 				array_push(
 					$data['items'],
 					Array(
-						'id'=>$row['id'],
+						'id'=>$row['id_patient'],
 						'text'=>$row['name']
 					)
 				);
@@ -44,13 +44,13 @@ use \HOdonto\Model;
 			$result = $sql->select("
 				SELECT *
 				FROM tb_patients
-				WHERE id = :id
+				WHERE id_patient = :id_patient
 			", Array(
-				'id'=>$idPatient
+				'id_patient'=>$idPatient
 			));
 
 			if (count($result) > 0) {
-				$this->setData($result[0]);
+				$this->setValues($result[0]);
 				$this->setcode(0);
 			} else {
 				$this->setCode(1);
@@ -61,14 +61,14 @@ use \HOdonto\Model;
 		public function save()
 		{
 
-			if ((int)$this->getid() === 0) {
+			if ((int)$this->getid_patient() === 0) {
 				$query = '
 					INSERT INTO tb_patients (name, doc_number, telephone, cellphone, email, street, street_number, city, state, zipcode)
 					VALUES (:name, :doc_number, :telephone, :cellphone, :email, :street, :street_number, :city, :state, :zipcode);
 				';
 			} else {
 				$query = '
-					UPDATE tb_patients 
+					UPDATE tb_patients
 					SET name = :name,
 						doc_number = :doc_number,
 						telephone = :telephone,
@@ -79,9 +79,9 @@ use \HOdonto\Model;
 						city = :city,
 						state = :state,
 						zipcode = :zipcode
-					WHERE id = :id
+					WHERE id_patient = :id_patient
 				';
-				$data[':id'] = $this->getid();
+				$data[':id_patient'] = $this->getid_patient();
 			}
 
 			$data[':name'] = $this->getname();
@@ -99,9 +99,15 @@ use \HOdonto\Model;
 
 			$sql->query($query, $data);
 			
-			if ((int)$this->getid() === 0) {
-				$result = $sql->select('SELECT LAST_INSERT_ID()');
-				$this->setid((int)$result[0]['LAST_INSERT_ID()']);
+			if ((int)$this->getid_patient() === 0) {
+				$result = $sql->select('
+					SELECT *
+					FROM tb_patients
+					WHERE id_patient = LAST_INSERT_ID()
+				');
+
+				if (count($result) > 0)
+					$this->setValues($result[0]);
 			}
 
 			$this->setcode(0);
@@ -113,9 +119,9 @@ use \HOdonto\Model;
 			$sql = new Sql();
 			$sql->query('
 				DELETE FROM tb_patients
-				WHERE id = :id
+				WHERE id_patient = :id_patient
 			', Array(
-				':id'=>$idPatient
+				':id_patient'=>$idPatient
 			));
 		}
 

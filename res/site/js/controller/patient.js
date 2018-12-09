@@ -119,7 +119,7 @@
 				$.post( 
 					'/patient/save',
 					{
-						id : Number($selPatient.val()),
+						id_patient : Number($selPatient.val()),
 						name : $inpName.val(),
                         doc_number : $inpDocNumber.val(),
                         telephone : $inpPhoneNumber.val(),
@@ -136,7 +136,7 @@
 						if (result.code === 0) {
                             //loading_off();
 							util.message(appDescription, result.message, 0);
-							setSelectPatient(result.id, $inpName.val());
+							setSelectPatient(result.id_patient, $inpName.val());
 							enableControls(true, false);
 						} else {
 							//loading_off();
@@ -155,7 +155,7 @@
 				$.post(
 					'/patient/delete',
 					{
-						id : Number($selPatient.val())
+						id_patient : Number($selPatient.val())
 					},
 					function( data ) {
 						var result = JSON.parse(data);
@@ -176,13 +176,13 @@
             var idPatient = Number($selPatient.val());
             
             if (idPatient === 0){
-                util.message(appName, "You didn't select a patient!");
+                util.message(appDescription, "You didn't select a patient!");
 			} else {
 				//loading_on();
 				$.post(
 					'/patient/find',
 					{
-						id : idPatient
+						id_patient : idPatient
 					},
 					function( data ) {
                         var result = JSON.parse(data);
@@ -200,7 +200,7 @@
 							enableControls(true, false);
 						} else {
 							//loading_off();
-							util.message(appName, result.message, 1);
+							util.message(appDescription, result.message, 1);
 						}
 						//loading_off();
 					}

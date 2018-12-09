@@ -15,7 +15,7 @@ use \HOdonto\Model;
 
 			$sql = new Sql();
 			$results = $sql->select('
-				SELECT d.id, d.name
+				SELECT d.id_dentist, d.name
 				FROM tb_dentists d
 				WHERE UPPER(d.name) LIKE :name
 			', Array(
@@ -29,7 +29,7 @@ use \HOdonto\Model;
 				array_push(
 					$data['items'],
 					Array(
-						'id'=>$row['id'],
+						'id'=>$row['id_dentist'],
 						'text'=>$row['name']
 					)
 				);
@@ -44,13 +44,13 @@ use \HOdonto\Model;
 			$result = $sql->select("
 				SELECT *
 				FROM tb_dentists
-				WHERE id = :id
+				WHERE id_dentist = :id_dentist
 			", Array(
-				'id'=>$idDentist
+				'id_dentist'=>$idDentist
 			));
 
 			if (count($result) > 0) {
-				$this->setData($result[0]);
+				$this->setValues($result[0]);
 				$this->setcode(0);
 			} else {
 				$this->setCode(1);
@@ -61,20 +61,20 @@ use \HOdonto\Model;
 		public function save()
 		{
 
-			if ((int)$this->getid() === 0) {
+			if ((int)$this->getid_dentist() === 0) {
 				$query = '
 					INSERT INTO tb_dentists (name, doc_number)
 					VALUES (:name, :doc_number)
 				';
 			} else {
 				$query = '
-					UPDATE tb_dentists 
+					UPDATE tb_dentists
 					SET name = :name,
 						doc_number = :doc_number
-					WHERE id = :id
+					WHERE id_dentist = :id_dentist
 				';
 				
-				$data[':id'] = $this->getid();
+				$data[':id_dentist'] = $this->getid_dentist();
 			}
 
 			$data[':name'] = $this->getname();
@@ -84,9 +84,15 @@ use \HOdonto\Model;
 
 			$sql->query($query, $data);
 			
-			if ((int)$this->getid() === 0) {
-				$result = $sql->select('SELECT LAST_INSERT_ID()');
-				$this->setid((int)$result[0]['LAST_INSERT_ID()']);
+			if ((int)$this->getid_dentist() === 0) {
+				$result = $sql->select('
+					SELECT *
+					FROM tb_dentists
+					WHERE id_dentist = LAST_INSERT_ID()
+				');
+
+				if (count($result) > 0)
+					$this->setValues($result[0]);
 			}
 
 			$this->setcode(0);
@@ -98,9 +104,9 @@ use \HOdonto\Model;
 			$sql = new Sql();
 			$sql->query('
 				DELETE FROM tb_dentists
-				WHERE id = :id
+				WHERE id_dentist = :id_dentist
 			', Array(
-				':id'=>$idDentist
+				':id_dentist'=>$idDentist
 			));
 		}
 

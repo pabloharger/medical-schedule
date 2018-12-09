@@ -4,11 +4,11 @@ use \HOdonto\Model\Schedule;
 
 $app->post('/schedule/get', function(){
 
-	if (!isset($_POST['id'])) $_POST['id'] = 0;
+	if (!isset($_POST['id_schedule'])) $_POST['id_schedule'] = 0;
 
 	$schedule = new Schedule();
 
-	echo json_encode( $schedule->get((int)$_POST['id']) );
+	echo json_encode( $schedule->get((int)$_POST['id_schedule']) );
 
 });
 
@@ -16,7 +16,7 @@ $app->post('/schedule/save', function(){
 
 	$schedule = new Schedule();
 
-	if (!isset($_POST['id'])) $_POST['id'] = 0;
+	if (!isset($_POST['id_schedule'])) $_POST['id_schedule'] = 0;
 	
 	try {
 		if (!isset($_POST['id_dentist']) || (int)$_POST['id_dentist'] === 0){
@@ -39,7 +39,7 @@ $app->post('/schedule/save', function(){
 		$schedule->setmessage($e->getMessage());
 	}
 
-	$schedule->setData($_POST);
+	$schedule->setValues($_POST);
 	$schedule->save();	
 
 	echo json_encode($schedule->getValues());
@@ -47,28 +47,31 @@ $app->post('/schedule/save', function(){
 
 $app->post('/schedule/delete', function(){
 
-	if (!isset($_POST['id'])) $_POST['id'] = 0;
+	if (!isset($_POST['id_schedule'])) $_POST['id_schedule'] = 0;
 
 	$schedule = new Schedule();
 
-	$schedule->delete((int)$_POST['id']);
+	$schedule->delete((int)$_POST['id_schedule']);
 	$schedule->setcode(0);
 	$schedule->setmessage('Schedule deleted!');
 	echo json_encode($schedule->getValues());
+
 });
 
 $app->post('/schedule/refresh', function(){
-	if (isset($_POST['id']) || (int)$_POST['id'] > 0){
+
+	if (isset($_POST['id_schedule']) || (int)$_POST['id_schedule'] > 0){
 		$schedule = new Schedule();
-		$schedule->get((int)$_POST['id']);
+		$schedule->get((int)$_POST['id_schedule']);
 		$schedule->setdate_time_begin($_POST['date_time_begin']);
 		$schedule->setdate_time_end($_POST['date_time_end']);
 		$schedule->save();
 		$schedule->setcode(0);
 		$schedule->setmessage('');
-		$schedule->get((int)$_POST['id']);
+		$schedule->get((int)$_POST['id_schedule']);
 		echo json_encode($schedule->getValues());
 	}
+
 });
 
 ?>

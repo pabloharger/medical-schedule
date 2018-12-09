@@ -16,21 +16,21 @@ use \HOdonto\Model;
 					SELECT s.*, d.name name_dentist, p.name name_patient
 					FROM tb_schedules s
 					INNER JOIN tb_dentists d
-					ON d.id = s.id_dentist
+					ON d.id_dentist = s.id_dentist
 					INNER JOIN tb_patients p
-					ON p.id = s.id_patient
+					ON p.id_patient = s.id_patient
 				');
 			} else {
 				$results = $sql->select('
 					SELECT s.*, d.name name_dentist, p.name name_patient
 					FROM tb_schedules s
 					INNER JOIN tb_dentists d
-					ON d.id = s.id_dentist
+					ON d.id_dentist = s.id_dentist
 					INNER JOIN tb_patients p
-					ON p.id = s.id_patient
-					WHERE s.id = :id
+					ON p.id_patient = s.id_patient
+					WHERE s.id_schedule = :id_schedule
 					', Array(
-						':id'=>$idSchedule
+						':id_schedule'=>$idSchedule
 					));
 			}
 
@@ -48,7 +48,7 @@ use \HOdonto\Model;
 			}
 
 			if ((int)$idSchedule > 0 && count($results) > 0) {
-				$this->setData($results[0]);
+				$this->setValues($results[0]);
 			}
 
 			return $result;
@@ -57,7 +57,7 @@ use \HOdonto\Model;
 		public function save()
 		{
 
-			if ((int)$this->getid() === 0) {
+			if ((int)$this->getid_schedule() === 0) {
 				$query = '
 					INSERT INTO tb_schedules (id_patient, id_dentist, date_time_begin, date_time_end, observation)
 					VALUES (:id_patient, :id_dentist, :date_time_begin, :date_time_end, :observation)
@@ -70,10 +70,10 @@ use \HOdonto\Model;
 						date_time_begin = :date_time_begin,
 						date_time_end = :date_time_end,
 						observation = :observation
-					WHERE id = :id
+					WHERE id_schedule = :id_schedule
 				';
 				
-				$data[':id'] = $this->getid();
+				$data[':id_schedule'] = $this->getid_schedule();
 			}
 
 			$data[':id_patient'] = $this->getid_patient();
@@ -86,9 +86,15 @@ use \HOdonto\Model;
 
 			$sql->query($query, $data);
 			
-			if ((int)$this->getid() === 0) {
-				$result = $sql->select('SELECT LAST_INSERT_ID()');
-				$this->setid((int)$result[0]['LAST_INSERT_ID()']);
+			if ((int)$this->getid_schedule() === 0) {
+				$result = $sql->select('
+					SELECT *
+					FROM tb_schedules
+					WHERE id_schedule = LAST_INSERT_ID()
+				');
+
+				if (count($result) > 0)
+					$this->setValues($result[0]);
 			}
 
 			$this->setcode(0);
@@ -100,9 +106,9 @@ use \HOdonto\Model;
 			$sql = new Sql();
 			$sql->query('
 				DELETE FROM tb_schedules
-				WHERE id = :id
+				WHERE id_schedule = :id_schedule
 			', Array(
-				':id'=>$idSchedule
+				':id_schedule'=>$idSchedule
 			));
 		}
 	}
