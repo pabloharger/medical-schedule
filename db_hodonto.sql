@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.5-10.1.29-MariaDB)
 # Database: db_hodonto
-# Generation Time: 2018-11-28 00:07:06 +0000
+# Generation Time: 2018-12-09 12:23:29 +0000
 # ************************************************************
 
 
@@ -26,10 +26,10 @@
 DROP TABLE IF EXISTS `tb_dentists`;
 
 CREATE TABLE `tb_dentists` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_dentist` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
   `doc_number` varchar(75) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id_dentist`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -40,7 +40,7 @@ CREATE TABLE `tb_dentists` (
 DROP TABLE IF EXISTS `tb_patients`;
 
 CREATE TABLE `tb_patients` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_patient` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
   `doc_number` varchar(45) DEFAULT NULL,
   `telephone` varchar(45) DEFAULT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE `tb_patients` (
   `city` varchar(45) DEFAULT NULL,
   `state` varchar(45) DEFAULT NULL,
   `zipcode` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id_patient`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -62,13 +62,44 @@ CREATE TABLE `tb_patients` (
 DROP TABLE IF EXISTS `tb_schedules`;
 
 CREATE TABLE `tb_schedules` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id_schedule` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_dentist` int(11) NOT NULL,
   `id_patient` int(11) NOT NULL,
   `date_time_begin` datetime NOT NULL,
   `date_time_end` datetime NOT NULL,
   `observation` varchar(250) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id_schedule`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+# Dump of table tb_users
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tb_users`;
+
+CREATE TABLE `tb_users` (
+  `id_user` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL DEFAULT '',
+  `password` varchar(60) NOT NULL DEFAULT '',
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+# Dump of table tb_userspasswordsrecoveries
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tb_userspasswordsrecoveries`;
+
+CREATE TABLE `tb_userspasswordsrecoveries` (
+  `id_recovery` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `iduser` int(11) NOT NULL,
+  `ip` varchar(45) NOT NULL DEFAULT '',
+  `dtrecovery` datetime DEFAULT NULL,
+  `dtregister` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_recovery`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
