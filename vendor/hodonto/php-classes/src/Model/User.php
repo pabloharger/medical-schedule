@@ -122,6 +122,7 @@ class User extends Model {
 			return $user;
 
 		} else {
+
 			User::setError('Email or password is invalid.');
 			header('Location: /login');
 			exit;
@@ -150,8 +151,21 @@ class User extends Model {
 	{
 		//return password_hash($password, PASSWORD_DEFAULT, ['cost'=>12]);
 		$cost = '08';
-		$salt = 'Cf1f11ePArKlBJomM0F6aJ';
+		$salt = User::randomPassword();//'Cf1f11ePArKlBJomM0F6aJ';
+
 		return crypt($password, '$2a$' . $cost . '$' . $salt . '$');
+	}
+
+	private static function randomPassword(){
+		$password = "";
+		$charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+		for($i = 0; $i < 22; $i++) {
+			$random_int = mt_rand();
+			$password .= $charset[$random_int % strlen($charset)];
+		}
+
+		return $password;
 	}
 
 	private static function validatePassword($password, $hash)
@@ -171,6 +185,7 @@ class User extends Model {
 
 	public static function checkLogin()
 	{
+
 		if (
 			!isset($_SESSION[User::SESSION])
 			||
