@@ -1,14 +1,14 @@
 # hodonto
 Medical Schedule
 
-# Configure database
+#### Configure database
 
 vendor/hodonto/php-classes/src/DB/Sql.php
 
-# Configure email account
+#### Configure email account
 
 vendor/hodonto/php-classes/src/Mailer.php
 
-# Database file
+#### Database file
 
 db_hodonto.sql
