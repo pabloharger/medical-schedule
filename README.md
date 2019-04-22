@@ -17,4 +17,4 @@ run composer before run the project
 
 ### Slim Framework ###
 
-Grant read/write permission to the ###views-cache### folder
+Grant read/write permission to the views-cachefolder
