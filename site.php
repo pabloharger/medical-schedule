@@ -167,7 +167,7 @@ $app->post('/forgot', function(){
 
 });
 
-$app->get('/forgot/sent', function(){
+$app->get('/forgot-sent', function(){
 
 	$page = new Page();
 
@@ -239,15 +239,3 @@ $app->get('/forgot-reset-success', function(){
 })
 
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
