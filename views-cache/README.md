@@ -1,0 +1,1 @@
+Slim framework cache files
