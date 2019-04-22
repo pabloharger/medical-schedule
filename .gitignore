@@ -1,6 +1,3 @@
-# Created by https://www.gitignore.io/api/macos,sublimetext
-# Edit at https://www.gitignore.io/?templates=macos,sublimetext
-
 ### macOS ###
 # General
 .DS_Store
@@ -63,5 +60,12 @@ GitHub.sublime-settings
 
 ### Composer ###
 composer.phar
+vendor/*
+res/site/components/*
 
-# End of https://www.gitignore.io/api/macos,sublimetext
+### Whitelist ###
+
+!*/
+!vendor/hodonto/*
+!res/site/components/moment/*
+!res/site/components/shortcut/*
