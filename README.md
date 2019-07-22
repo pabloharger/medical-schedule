@@ -1,5 +1,9 @@
 # hodonto
-Medical Schedule
+Medical Schedul
+
+CRUD made with PHP
+
+using slim micro framework and raintpl
 
 #### Configure database
 
