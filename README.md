@@ -5,15 +5,13 @@ CRUD made with PHP
 
 using slim micro framework and raintpl
 
+#### Configure env variable
+
+rename the file .ENV_SAMPLE to .ENV and fill the variables
+
 #### Configure database
 
-db_hodonto.sql
-
-vendor/hodonto/php-classes/src/DB/Sql.php
-
-#### Configure email account
-
-vendor/hodonto/php-classes/src/Mailer.php
+crate database and run the file db_hodonto.sql
 
 ### Composer ###
 
