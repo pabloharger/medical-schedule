@@ -1,17 +1,13 @@
 (function(w){
     'use strinct';
 
-
-
     var util = (function utilController(){
         return {
-            message: function message(title, message, type){
-                $.prompt(message,{ 
-                    buttons:{'Close':true},
-                    title: title,
-                    buttonClose: false,
-                    close: function(e,v,m,f){}
-                });
+            message: function showMessage(title, message, buttonOK = "ok"){
+                if (title) $('#message-title').html(title);
+                if (message) $('#message-body').html(message);
+                $('#message-ok').html(buttonOK);
+                $('#my-modal').modal();
             }
         }
     })();
@@ -21,12 +17,16 @@
             addClassIfNotExists: function addClassIfNotExists(elem, addClass){
                 if (!elem.hasClass(addClass))
                     elem.addClass(addClass);
+            },
+            addInvalidFeedback: function addInvalidFeedback(elem, feedback, addClass){
+                this.addClassIfNotExists(elem, addClass);
+                if (elem.parent().find('.invalid-feedback') !== undefined)
+                    elem.parent().find('.invalid-feedback').html(feedback);
             }
         }
     })();
 
     var utilForm = (function utilFormController(){
-
         function addShortCut(shortcut, propagate, callBack){
             w.shortcut.add(
                 shortcut,

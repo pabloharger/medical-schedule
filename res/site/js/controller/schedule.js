@@ -16,7 +16,6 @@
       initComponents();
       initEvents();
       clearDialog();
-      fillCalendar();
     }
 
     function initComponents(){
@@ -31,10 +30,13 @@
         allDaySlot: false,
         defaultView:'agendaWeek',
         editable: true,
+        titleFormat: 'DD/MM/YYYY',
+        columnHeaderFormat: 'DD/MM',
         eventClick: scheduleClickHandler,
         eventResize: scheduleRedizeHandler,
         eventDrop: scheduleEventDropHandler,
-        dayClick: scheduleDayClickHandler
+        dayClick: scheduleDayClickHandler,
+        events: fillCalendar
       });
 
 			$selDentist.select2({
@@ -113,18 +115,8 @@
         }
       );
 
-      $inpTimeInit.datetimepicker({
-        format: 'dd/mm/yyyy hh:ii',
-        autoclose: true,
-        todayBtn: true,
-        readOnly: true
-      });
-
-      $inpTimeFinal.datetimepicker({
-        format: 'dd/mm/yyyy hh:ii',
-        autoclose: true,
-        todayBtn: true
-      });
+      $inpTimeInit.datetimepicker({format: 'DD/MM/YYYY HH:mm'});
+      $inpTimeFinal.datetimepicker({format: 'DD/MM/YYYY HH:mm'});
     }
 
     function initEvents(){
@@ -157,7 +149,7 @@
               $schedule.fullCalendar('removeEvents', [ Number( $inpId.val() ) ] );
             }
 
-            util.message(appDescription, result.message, 1);
+            util.message(appDescription, result.message);
           });
 
       }
@@ -195,15 +187,17 @@
     
     function validateTimeFinal(){
       if ($inpTimeFinal.val() === ''){
-        $inpTimeFinal.parent().find('.invalid-feedback').html("You need set the final time.");
+        //utilDOM.addInvalidFeedback  ($inpTimeFinal, "You need set the final time.", "is-invalid");
+        //$inpTimeFinal.parent().find('.invalid-feedback').html("You need set the final time.");
         utilDOM.addClassIfNotExists($inpTimeFinal, 'is-invalid');
         return false
       } 
-        
+
       if (($inpTimeInit.val() !== '') && ($inpTimeInit.val() >= $inpTimeFinal.val())){  
-        utilDOM.addClassIfNotExists($inpTimeFinal, 'is-invalid');
-        if ($inpTimeFinal.parent().find('.invalid-feedback') !== undefined)
-          $inpTimeFinal.parent().find('.invalid-feedback').html("Final date can not be greater than the starting date");
+        utilDOM.addInvalidFeedback($inpTimeFinal, "Final date can not be greater than the starting date", "is-invalid");
+        // utilDOM.addClassIfNotExists($inpTimeFinal, 'is-invalid');
+        // if ($inpTimeFinal.parent().find('.invalid-feedback') !== undefined)
+        //   $inpTimeFinal.parent().find('.invalid-feedback').html("Final date can not be greater than the starting date");
         return false;
       }
 
@@ -235,64 +229,67 @@
           if (result.code === 0) {
             //loading_off();
             $inpId.val(result.id_schedule);
-            addCalendarSchedule(
-              Number($inpId.val()),
-              $selDentist.children()[0].innerText,
-              $selPatient.children()[0].innerText,
-              utilMoment.getInternalFormatedDateTime($inpTimeInit.val()),
-              utilMoment.getInternalFormatedDateTime($inpTimeFinal.val()),
-              $inpObservation.val().trim()
-            );
+            addCalendarSchedule({
+              id_schedule: Number($inpId.val()),
+              name_dentist: $selDentist.children()[0].innerText,
+              name_patient: $selPatient.children()[0].innerText,
+              date_time_begin: utilMoment.getInternalFormatedDateTime($inpTimeInit.val()),
+              date_time_end: utilMoment.getInternalFormatedDateTime($inpTimeFinal.val()),
+              observation: $inpObservation.val().trim()
+            });
             $scheduleDialog.modal('hide');
             //clearDialog();
           } else {
             //loading_off();
-            util.message(appDescription, result.message, 1);
+            util.message(appDescription, result.message);
           }
         }
       );
     }
 
-    function fillCalendar(){
-      $.post( 
-        'schedule/get',
-        function( data ) {
-          var result = JSON.parse(data);
-          //loading_off();
-          result.forEach(function(curVal){
-            addCalendarSchedule(
-              Number(curVal.id_schedule),
-              curVal.name_dentist,
-              curVal.name_patient,
-              curVal.date_time_begin,
-              curVal.date_time_end,
-              curVal.observation
-            );
-          });
-        }
-      );
+    function fillCalendar(start, end, timezone, callback){
+        $.get({
+          url: 'schedule/get',
+          data: {
+            start: utilMoment.getInternalFormatedDateTime(start),
+            end: utilMoment.getInternalFormatedDateTime(end)
+          },
+          dataType: 'json',
+          success: function(data) {
+            $events = Array.prototype.map.call(data, function(item){
+              return formatEvent(item);
+            })
+            callback($events);
+          }
+        });
     }
 
-    function addCalendarSchedule(id_schedule, nameDentist, namePatient, start, end, observation){
+    function formatEvent(event) {
+      return {
+          id : event.id_schedule,
+          title : 
+            'Dr. ' + event.name_dentist + '\n' + 
+            event.name_patient  + '\n' + 
+            event.observation,
+          start : event.date_time_begin,
+          end : event.date_time_end
+        };
+    }
+
+    function addCalendarSchedule(event){
       $schedule.fullCalendar('removeEvents', [ Number( $inpId.val() ) ] );
       $schedule.fullCalendar(
         'addEventSource',
-        [
-          {
-            id : id_schedule,
-            title : 
-              'Dr. ' + nameDentist + '\n' + 
-              namePatient  + '\n' + 
-              observation,
-            start : start,
-            end : end
-          }
-        ]
+        [formatEvent(event)]
       );
     }
 
     function scheduleDayClickHandler(date, jsEvent, view) {
       clearDialog();
+
+      $inpTimeInit.val(utilMoment.getInterfaceFormatedDateTime(date));
+      $inpTimeFinal.val(utilMoment.getInterfaceFormatedDateTime(date));
+
       $btnDel.hide();
       $scheduleDialog.modal();
     }
@@ -310,11 +307,8 @@
     }
 
     function fillDialog(id_schedule){
-      $.post( 
-        'schedule/get',
-        {
-          id_schedule : id_schedule,
-        },
+      $.get( 
+        'schedule/get/' + id_schedule,
         function( data ) {
           var result = JSON.parse(data);
           if (result.length > 0) {
@@ -330,7 +324,7 @@
             //clearDialog();
           } else {
             //loading_off();
-            util.message(appDescription, result.message, 1);
+            util.message(appDescription, result.message,);
           }
         }
       );
@@ -356,7 +350,7 @@
           var result = JSON.parse(data);
           if (result.code > 0) {
             //loading_off();
-            util.message(appDescription, result.message, 1);
+            util.message(appDescription, result.message);
           }
         }
       );

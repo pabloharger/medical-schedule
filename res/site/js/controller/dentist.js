@@ -21,6 +21,36 @@
         }
 
         function initComponents(){
+			/*$selDentist.select2({
+				ajax: {
+					type : "POST",
+					url : "/lockup/dentist",
+					dataType : 'json',
+					delay : 250,
+					data : 
+						function (params) {
+							return {
+									q : params.term,
+									page : params.page
+								};
+							},
+					processResults: function (data, params) {
+						params.page = params.page || 1;
+
+						return {
+							results : data.items,
+							pagination: {
+								more: (params.page * 30) < data.total_count
+							}
+						};
+					},
+					cache: true
+				},
+				escapeMarkup: function (markup) { return markup; },
+				minimumInputLength: 1,
+				width: '100%',
+				placeholder: 'Select a dentist...'
+			});*/
 			$selDentist.select2({
 				ajax: {
 					type : "POST",
@@ -121,12 +151,12 @@
 						var result = JSON.parse(data);
 						if (result.code === 0) {
                             //loading_off();
-							util.message(appDescription, result.message, 0);
+							util.message(appDescription, result.message);
 							setSelectDentist(result.id_dentist, $inpName.val());
 							enableControls(true, false);
 						} else {
 							//loading_off();
-							util.message(appDescription, result.message, 1);
+							util.message(appDescription, result.message);
 						}
 					}
 				);
@@ -148,10 +178,10 @@
 						if (result.code === 0) {
 							//loading_off();
 							clearControls();
-							util.message(appDescription, result.message, 0);
+							util.message(appDescription, result.message);
 						} else {
 							//loading_off();
-							util.message(appDescription, result.message, 1);
+							util.message(appDescription, result.message);
 						}
 					}
 				);
@@ -179,7 +209,7 @@
 							enableControls(true, false);
 						} else {
 							//loading_off();
-							util.message(appDescription, result.message, 1);
+							util.message(appDescription, result.message);
 						}
 						//loading_off();
 					}

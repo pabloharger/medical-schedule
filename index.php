@@ -1,20 +1,24 @@
 <?php 
 session_start();
 
+use Slim\Factory\AppFactory;
+use Slim\Handlers\Strategies\RequestResponseArgs;
+
 require_once("vendor/autoload.php");
 
-use \Slim\Slim;
+$app = AppFactory::create();
 
-$app = new Slim();
+// Add Routing Middleware
+$app->addRoutingMiddleware();
 
-$app->config('debug', true);
+$errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 require_once("functions.php");
-require_once("site.php");
-require_once("lockup.php");
-require_once("dentist.php");
-require_once("patient.php");
-require_once("schedule.php");
+require_once("route-site.php");
+require_once("route-lockup.php");
+require_once("route-dentist.php");
+require_once("route-patient.php");
+require_once("route-schedule.php");
 
 $app->run();
 

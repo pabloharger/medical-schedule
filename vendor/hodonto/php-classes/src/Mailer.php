@@ -8,7 +8,7 @@ use Rain\Tpl;
 
  	const USERNAME = "";
  	const PASSWORD = "";
- 	const NAMEFROM = "hOdonto";
+ 	const NAMEFROM = "";
 
 	private $mail;
 

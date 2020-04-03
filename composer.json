@@ -11,8 +11,9 @@
     "minimum-stability": "dev",
     "require": {
         "phpmailer/phpmailer":"5.2.27",
-        "slim/slim":"2.0",
-        "rain/raintpl":"3.0.0"        
+        "slim/slim":"4.4.0",
+        "rain/raintpl":"3.1.1",
+        "slim/psr7": "1.0.0"
     },
     "scripts": {
         "update-assets": "php composer.php update-assets",

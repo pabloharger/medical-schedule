@@ -135,12 +135,12 @@
 						var result = JSON.parse(data);
 						if (result.code === 0) {
                             //loading_off();
-							util.message(appDescription, result.message, 0);
+							util.message(appDescription, result.message);
 							setSelectPatient(result.id_patient, $inpName.val());
 							enableControls(true, false);
 						} else {
 							//loading_off();
-							util.message(appDescription, result.message, 1);
+							util.message(appDescription, result.message);
 						}
 					}
 				);
@@ -162,10 +162,10 @@
 						if (result.code === 0) {
 							//loading_off();
 							clearControls();
-							util.message(appDescription, result.message, 0);
+							util.message(appDescription, result.message);
 						} else {
 							//loading_off();
-							util.message(appDescription, result.message, 1);
+							util.message(appDescription, result.message);
 						}
 					}
 				);
@@ -200,7 +200,7 @@
 							enableControls(true, false);
 						} else {
 							//loading_off();
-							util.message(appDescription, result.message, 1);
+							util.message(appDescription, result.message);
 						}
 						//loading_off();
 					}

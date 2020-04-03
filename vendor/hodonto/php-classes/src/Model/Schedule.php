@@ -54,6 +54,41 @@ use \HOdonto\Model;
 			return $result;
 		}
 
+		public function getInterval($start, $end)
+		{
+			$sql = new Sql();
+
+			
+			$results = $sql->select('
+				SELECT s.*, d.name name_dentist, p.name name_patient
+				FROM tb_schedules s
+				INNER JOIN tb_dentists d
+				ON d.id_dentist = s.id_dentist
+				INNER JOIN tb_patients p
+				ON p.id_patient = s.id_patient
+				WHERE s.date_time_begin >= :date_time_begin
+				AND s.date_time_end <= :date_time_end
+				', Array(
+					':date_time_begin'=>$start,
+					':date_time_end'=>$end
+				));
+
+			$result = Array();
+
+			if (count($results) > 0) {
+				foreach ($results as $row) {
+					$data = Array();
+					foreach ($row as $key => $col) {
+						$data[$key] = $col;
+					}
+
+					array_push($result, $data);
+				}
+			}
+
+			return $result;
+		}
+
 		public function save()
 		{
 
