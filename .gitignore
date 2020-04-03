@@ -46,5 +46,4 @@ res/site/components/*
 
 !*/
 !vendor/hodonto/*
-!res/site/components/moment/*
 !res/site/components/shortcut/*
