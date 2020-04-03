@@ -45,8 +45,10 @@ res/site/components/*
 ### Rain\Tpl tmp files  ###
 views-cache/*
 
-### Whitelist ###
+### .ENV file ###
+.ENV
 
+### Whitelist ###
 !*/
 !vendor/hodonto/*
 !res/site/components/shortcut/*

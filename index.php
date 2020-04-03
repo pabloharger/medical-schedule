@@ -1,10 +1,13 @@
 <?php 
 session_start();
 
+use Dotenv\Dotenv;
 use Slim\Factory\AppFactory;
-use Slim\Handlers\Strategies\RequestResponseArgs;
 
 require_once("vendor/autoload.php");
+
+$dotenv = Dotenv::createMutable(__DIR__);
+$dotenv->load();
 
 $app = AppFactory::create();
 

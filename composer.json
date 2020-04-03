@@ -13,7 +13,8 @@
         "phpmailer/phpmailer":"5.2.27",
         "slim/slim":"4.4.0",
         "rain/raintpl":"3.1.1",
-        "slim/psr7": "1.0.0"
+        "slim/psr7": "1.0.0",
+        "vlucas/phpdotenv": "*"
     },
     "scripts": {
         "update-assets": "php composer.php update-assets",

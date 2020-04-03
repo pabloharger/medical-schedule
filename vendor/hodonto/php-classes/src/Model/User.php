@@ -273,7 +273,7 @@ class User extends Model {
             $code = openssl_encrypt($result['idrecovery'], User::ENCRYPTMETHOD, $key, 0, $iv);
        	    $code = base64_encode($code);
 
-	    	$link = "hodonto.com/forgot/reset/$code";
+			$link = getenv('HOST_URL') . "/forgot/reset/$code";
 
 			$mailer = new Mailer(
 				$data["email"], 

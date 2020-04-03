@@ -155,39 +155,11 @@ $app->group('', function (RouteCollectorProxy $group) {
 		return $response;
 	});
 
-	$group->get('/forgot', function(Request $request, Response $response, $args){
-
-		$page = new Page();
-
-		$page->setTpl('forgot', Array(
-			'error'=>User::getError()
-		));
-
-		return $response;
-	});
-
-	$group->post('/forgot', function(){
-		if (!isset($_POST['email']) || $_POST['email'] === ''){
-			User::setError('Inform the email.');
-			header('Location: /forgot');
-			exit;
-		}
-
-		if (!User::forgotSent($_POST['email'])){
-			header('Location: /forgot');
-			exit;
-		}
-
-		header('Location: /forgot-sent');
-		exit;
-
-	});
-
 	$group->get('/forgot-sent', function(Request $request, Response $response, $args){
 
 		$page = new Page();
 
-		$page->setTpl('/forgot-sent');
+		$page->setTpl('forgot-sent');
 
 		return $response;
 	});
@@ -213,6 +185,34 @@ $app->group('', function (RouteCollectorProxy $group) {
 	});
 
 	$group->group('/forgot', function (RouteCollectorProxy $group) {
+		$group->get('', function(Request $request, Response $response, $args){
+
+			$page = new Page();
+	
+			$page->setTpl('forgot', Array(
+				'error'=>User::getError()
+			));
+	
+			return $response;
+		});
+	
+		$group->post('', function(){
+			if (!isset($_POST['email']) || $_POST['email'] === ''){
+				User::setError('Inform the email.');
+				header('Location: /forgot');
+				exit;
+			}
+	
+			if (!User::forgotSent($_POST['email'])){
+				header('Location: /forgot');
+				exit;
+			}
+	
+			header('Location: /forgot-sent');
+			exit;
+	
+		});
+
 		$group->post('/reset', function(Request $request, Response $response, $args){
 
 			try {
@@ -240,7 +240,7 @@ $app->group('', function (RouteCollectorProxy $group) {
 			return $response;
 		});
 
-		$group->get('/reset/:code', function(Request $request, Response $response, $args){
+		$group->get('/reset/{code}', function(Request $request, Response $response, $args){
 			
 			try {
 				$user = User::validForgotDecrypt($args['code']);	
