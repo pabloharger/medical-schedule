@@ -42,6 +42,9 @@ composer.phar
 vendor/*
 res/site/components/*
 
+### Rain\Tpl tmp files  ###
+views-cache/*
+
 ### Whitelist ###
 
 !*/
