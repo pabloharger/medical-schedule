@@ -8,19 +8,6 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 $app->group('', function (RouteCollectorProxy $group) {
 
-  $group->get('/', function(Request $request, Response $response, $args){
-    if (!User::checkSignIn()){
-      header('Location: /account/signin');
-      exit;
-    }
-
-    $page = new Page();
-    $page->setTpl('index', [
-      'name' => $_SESSION[User::SESSION]['firstName']
-    ]);
-    return $response;
-  });
-
   $group->get('/lang/{lang}', function(Request $request, Response $response, $args){
     setcookie('lang', $args['lang'], time() + (10 * 365 * 24 * 60 * 60), '/');
     setcookie('langInitials', substr($args['lang'], 0, 2), time() + (10 * 365 * 24 * 60 * 60), '/');
@@ -133,6 +120,19 @@ $app->group('', function (RouteCollectorProxy $group) {
         return $response;
       });
   
+    });
+
+    $group->get('/', function(Request $request, Response $response, $args){
+      if (!User::checkSignIn()){
+        header('Location: /account/signin');
+        exit;
+      }
+  
+      $page = new Page();
+      $page->setTpl('index', [
+        'name' => $_SESSION[User::SESSION]['firstName']
+      ]);
+      return $response;
     });
 
   });
