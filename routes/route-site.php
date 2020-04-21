@@ -9,7 +9,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 $app->group('', function (RouteCollectorProxy $group) {
 
   $group->get('/', function(Request $request, Response $response, $args){
-
+    var_dump('log_1');exit;
     if (!User::checkSignIn()){
       header('Location: /account/signin');
       exit;
@@ -23,6 +23,7 @@ $app->group('', function (RouteCollectorProxy $group) {
   });
 
   $group->get('/lang/{lang}', function(Request $request, Response $response, $args){
+    var_dump('log_2' . $args);exit;
     setcookie('lang', $args['lang'], time() + (10 * 365 * 24 * 60 * 60), '/');
     setcookie('langInitials', substr($args['lang'], 0, 2), time() + (10 * 365 * 24 * 60 * 60), '/');
 
