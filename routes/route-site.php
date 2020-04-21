@@ -9,7 +9,6 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 $app->group('', function (RouteCollectorProxy $group) {
 
   $group->get('/', function(Request $request, Response $response, $args){
-    echo 'aq2';
     // if (!User::checkSignIn()){
     //   header('Location: /account/signin');
     //   exit;
