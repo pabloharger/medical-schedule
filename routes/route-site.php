@@ -67,7 +67,7 @@ $app->group('', function (RouteCollectorProxy $group) {
       }
   
       $page = new Page();
-      $page->setTpl('signin', Array(
+      $page->setTpl('signIn', Array(
         'error'=>User::getError(),
         'info'=>User::getInfo()
       ));
@@ -78,7 +78,7 @@ $app->group('', function (RouteCollectorProxy $group) {
     $group->get('/signup', function(Request $request, Response $response, $args){
       $page = new Page();
   
-      $page->setTpl('signup', Array(
+      $page->setTpl('signUp', Array(
         'error'=>User::getError(),
         'regVal'=>(isset($_SESSION['signUpValues'])
         ? $_SESSION['signUpValues'] 
