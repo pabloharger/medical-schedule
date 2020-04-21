@@ -25,10 +25,6 @@ class Page {
     "debug" => false
     );
 
-    echo '-log2-';
-    print_r($config);
-    echo '-log2-';
-
     Tpl::configure( $config );
     $this->tpl = new Tpl();
     $this->setData($this->options["data"]);
@@ -47,8 +43,6 @@ class Page {
   public function setTpl($name, $data = array(), $returnHTML = false)
   {
     $this->setData($data);
-    echo '-log3-';
-    echo $name;
     return $this->tpl->draw($name, $returnHTML);
   }
 

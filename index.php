@@ -34,6 +34,14 @@ require_once("routes/route-dentist.php");
 require_once("routes/route-patient.php");
 require_once("routes/route-schedule.php");
 
+$routes = $app->getContainer()->router->getRoutes();
+// And then iterate over $routes
+
+foreach ($routes as $route) {
+    echo $route->getPattern(), "<br>";
+}
+exit;
+
 $app->run();
 
 ?>

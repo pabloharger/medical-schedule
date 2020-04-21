@@ -66,7 +66,6 @@ $app->group('', function (RouteCollectorProxy $group) {
         exit;
       }
   
-      echo '-log2-';
       $page = new Page();
       $page->setTpl('signin', Array(
         'error'=>User::getError(),
