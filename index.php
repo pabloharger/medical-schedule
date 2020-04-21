@@ -13,8 +13,10 @@ $i18n->setSectionSeparator('.');
 $i18n->init();
 
 // .ENV
-$dotenv = Dotenv::createMutable(__DIR__);
-$dotenv->load();
+if (file_exists(__DIR__ . '/.env')) {
+  $dotenv = Dotenv::createMutable(__DIR__);
+  $dotenv->load();
+}
 
 // Create App
 $app = AppFactory::create();
