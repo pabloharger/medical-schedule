@@ -40,10 +40,9 @@ Temporary Items
 ### Composer ###
 composer.phar
 vendor/*
-res/site/components/*
 
 ### Rain\Tpl tmp files  ###
-views-cache/*
+tmp/*
 
 ### .ENV file ###
 .ENV
@@ -51,4 +50,3 @@ views-cache/*
 ### Whitelist ###
 !*/
 !vendor/hodonto/*
-!res/site/components/shortcut/*
