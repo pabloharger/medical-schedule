@@ -9,14 +9,10 @@ using slim micro framework and raintpl
 
 rename the file .ENV_SAMPLE to .ENV and fill the variables
 
-#### Configure database
-
-crate database and run the file db_hodonto.sql
-
 ### Composer ###
 
 run composer before run the project
 
-### Slim Framework ###
+### Cache files ###
 
-Grant read/write permission to the views-cache folder
+Grant read/write permission to the tmp folder
