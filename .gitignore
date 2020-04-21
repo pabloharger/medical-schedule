@@ -38,6 +38,7 @@ Temporary Items
 .history
 
 ### Composer ###
+composer.lock
 composer.phar
 vendor/*
 
