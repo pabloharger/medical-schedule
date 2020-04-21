@@ -9,7 +9,7 @@ class Sql {
 	public function __construct()
 	{
 		$this->conn = new \PDO(
-			"mysql:dbname=".getenv('DB_DBNAME').";host=".getenv('DB_HOSTNAME'), 
+			getenv('DB_DRIVE').":dbname=".getenv('DB_DBNAME').";host=".getenv('DB_HOSTNAME').";PORT=".getenv('DB_PORT'), 
 			getenv('DB_USERNAME'),
 			getenv('DB_PASSWORD')
 		);

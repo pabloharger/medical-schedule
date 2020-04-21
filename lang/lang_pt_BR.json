@@ -1,0 +1,65 @@
+{
+  "header_clinicName": "Sua Clínica",
+
+  "header_menu_dentist": "Dentista",
+  "header_menu_patient": "Paciente",
+  "header_menu_schedule": "Agenda",
+  "header_menu_signOut": "Sair",
+
+  "index_welcome": "Bem vido, %s!",
+
+  "interface_button_save": "Salvar",
+  "interface_button_new": "Novo",
+  "interface_button_clear": "Limpar",
+  "interface_button_delete": "Apagar",
+  "interface_button_signIn": "Entrar",
+  "interface_button_send": "Enviar",
+  "interface_button_resend": "Reenviar",
+  "interface_button_close": "Fechar",
+  "interface_button_add": "Adicionar",
+
+  "interface_label_signUp": "Registrar",
+  "interface_label_email": "Email",
+  "interface_label_password": "Senha",
+  "interface_label_repeatPassword": "Confirmação Senha",
+  "interface_label_firstName": "Nome",
+  "interface_label_lastName": "Sobrenome",
+  "interface_label_forgotPassword": "Esqueceu a senha?",
+  "interface_label_resendActivationCode": "Reenviar código de ativação",
+  "interface_label_docNumber": "Número Documento",
+
+  "interface_waring_informEmail": "Informe o email",
+  "interface_waring_informPassword": "Informe a senha",
+  "interface_waring_informFirstName": "Informe o nome",
+  "interface_waring_informLastName": "Informe o sobrenome",
+  "interface_waring_informDentist": "Informe o dentista",
+  "interface_waring_informPatient": "Informe o paciente",
+  "interface_waring_informInitialTime": "Informe a hora inicial",
+  "interface_waring_informFinalTime": "Informe a hora final",
+
+  "interface_info_userHasBeenRegistered": "Usuário registrado, ative sua conta com o e-mail que lhe foi enviado para você",
+  "interface_info_passwordHasBeenSentFollowInstructions": "Email enviado! Verifique o email enviado e siga as instruções",
+  "interface_info_passwordChangedSuccessfully": "Senha alterada com sucesso",
+  "interface_info_accountActivatedSuccessfully": "Sua conta foi ativada com sucesso",
+  "interface_info_dentistSaved": "Dentista gravado",
+  "interface_info_patientSaved": "Paciente gravado",
+  "interface_info_scheduleSaved": "Agendamento gravado",
+
+  "interface_signIn_signIn": "Acessar sua conta",
+
+  "interface_resetPassowrd_redefinePassword": "Redefina sua senha",
+
+  "interface_dentist_selectADentist": "Selecione um dentista",
+
+  "interface_patient_phoneNumber": "Telefone",
+  "interface_patient_mobileNumber": "Celular",
+  "interface_patient_address": "Endereço",
+  "interface_patient_city": "Cidade",
+  "interface_patient_state": "Estado",
+  "interface_patient_zipCode": "CEP",
+
+  "interface_schedule_addSchedule": "Adicionar Agendamento",
+  "interface_schedule_initialTime": "Hora Início",
+  "interface_schedule_finalTime": "Hora Fim",
+  "interface_schedule_obs": "Observação"
+}

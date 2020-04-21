@@ -2,129 +2,80 @@
 
 namespace HOdonto\Model;
 
-use \HOdonto\DB\Sql;
-use \HOdonto\Model;
+use \HOdonto\Model\Model;
+use \HOdonto\API\Api;
 
-	class Patient extends Model
-	{
+class Patient extends Model
+{
 
-		public static function lockUp($search)
-		{
-			$search = strtoupper($search);
-			$data = array();
+  public static function lockUp($search)
+  {
+    $res = Api::run(Api::getRoutes()->patient->get, ['firstName' => [ '$substring' => $search ]]);
+    if ($res['status']['code'] == 200) {
+      $data = Array();
+      $data['items'] = [];
 
-			$sql = new Sql();
-			$results = $sql->select('
-				SELECT p.id_patient, p.name
-				FROM tb_patients p
-				WHERE UPPER(p.name) LIKE :name
-			', Array(
-				':name'=> '%' . $search . '%'
-			));
+      foreach ($res['response'] as $row) {
+        array_push(
+          $data['items'],
+          Array(
+            'id'=>$row['id'],
+            'text'=>$row['firstName']
+        ));
+      }
+    }
+    return json_encode($data);
+  }
 
-			$data = Array();
-			$data['items'] = [];
+  public function get($idPatient)
+  {
+    $res = Api::run(Api::formatRouteUri(Api::getRoutes()->patient->getId, $idPatient));
+    if ($res['status']['code'] == 200) {
+      $this->setcode(0);
+      $this->setValues($res['response']);
+    } else {
+      $this->setcode(1);
+      $this->setmessage($res['status']['message']);
+    }
+    return $this->getValues();
+  }
 
-			foreach ($results as $row) {				
-				array_push(
-					$data['items'],
-					Array(
-						'id'=>$row['id_patient'],
-						'text'=>$row['name']
-					)
-				);
-			}
-			return json_encode($data);
-		}
+  public function post()
+  {
+    $data = $this->getvalues();
+    unset($data['id']);
+    $res = Api::run(Api::getRoutes()->patient->post, $data);
 
-		public function get($idPatient)
-		{
-			$sql = new Sql();
+    if ($res['status']['code'] == 201) {
+      $this->setcode(0);
+      $this->setmessage(L('interface_info_patientSaved'));
+      $this->setValues($res['response']);
+    } else {
+      $this->setcode(1);
+      $this->setmessage($res['status']['message']);
+    }
+    return $this->getValues();
+  }
 
-			$result = $sql->select("
-				SELECT *
-				FROM tb_patients
-				WHERE id_patient = :id_patient
-			", Array(
-				'id_patient'=>$idPatient
-			));
+  public function put()
+  {
+    $res = Api::run(Api::formatRouteUri(Api::getRoutes()->patient->put, (int)$this->getid()), $this->getvalues());
 
-			if (count($result) > 0) {
-				$this->setValues($result[0]);
-				$this->setcode(0);
-			} else {
-				$this->setCode(1);
-				$this->setmessage("Patient code $idPatient not found!");
-			}
-		}
+    if ($res['status']['code'] == 201) {
+      $this->setcode(0);
+      $this->setmessage(L('interface_info_patientSaved'));
+    } else {
+      $this->setcode(1);
+      $this->setmessage($res['status']['message']);
+    }
+    return $this->getValues();
+  }
 
-		public function save()
-		{
+  public function delete($idPatient)
+  {
+    Api::run(Api::formatRouteUri(Api::getRoutes()->patient->delete, $idPatient));
+  }
 
-			if ((int)$this->getid_patient() === 0) {
-				$query = '
-					INSERT INTO tb_patients (name, doc_number, telephone, cellphone, email, street, street_number, city, state, zipcode)
-					VALUES (:name, :doc_number, :telephone, :cellphone, :email, :street, :street_number, :city, :state, :zipcode);
-				';
-			} else {
-				$query = '
-					UPDATE tb_patients
-					SET name = :name,
-						doc_number = :doc_number,
-						telephone = :telephone,
-						cellphone = :cellphone,
-						email = :email,
-						street = :street,
-						street_number = :street_number,
-						city = :city,
-						state = :state,
-						zipcode = :zipcode
-					WHERE id_patient = :id_patient
-				';
-				$data[':id_patient'] = $this->getid_patient();
-			}
-
-			$data[':name'] = $this->getname();
-			$data[':doc_number'] = $this->getdoc_number();
-			$data[':telephone'] = $this->gettelephone();
-			$data[':cellphone'] = $this->getcellphone();
-			$data[':email'] = $this->getemail();
-			$data[':street'] = $this->getstreet();
-			$data[':street_number'] = $this->getstreet_number();
-			$data[':city'] = $this->getcity();
-			$data[':state'] = $this->getstate();
-			$data[':zipcode'] = $this->getzipcode();
-
-			$sql = new Sql();
-
-			$sql->query($query, $data);
-			
-			if ((int)$this->getid_patient() === 0) {
-				$result = $sql->select('
-					SELECT *
-					FROM tb_patients
-					WHERE id_patient = LAST_INSERT_ID()
-				');
-
-				if (count($result) > 0)
-					$this->setValues($result[0]);
-			}
-
-			$this->setcode(0);
-			$this->setmessage('Patient saved!');
-		}
-
-		public function delete($idPatient)
-		{
-			$sql = new Sql();
-			$sql->query('
-				DELETE FROM tb_patients
-				WHERE id_patient = :id_patient
-			', Array(
-				':id_patient'=>$idPatient
-			));
-		}
-
-	}
+}
 
 ?>

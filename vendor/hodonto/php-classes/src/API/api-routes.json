@@ -1,0 +1,412 @@
+{
+  "user": {
+    "get": {
+      "uri": "user",
+      "method": "GET",
+      "description": "Get user using body parameters with filter",
+      "authRoute" : true
+    },
+    "getId": {
+      "uri": "user/%d",
+      "method": "GET",
+      "description": "Get user by id",
+      "authRoute" : true,
+      "uri_parameters": {
+        "userId": {
+          "type": "integer"
+        }
+      }
+    },
+    "post": {
+      "uri": "user",
+      "method": "POST",
+      "description": "Insert a new user",
+      "authRoute" : false,
+      "request_fields": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "password_confirmation": {
+          "type": "string"
+        }
+      }
+    },
+    "put": {
+      "uri": "user/%d",
+      "method": "PUT",
+      "description": "Update user by id",
+      "authRoute" : true,
+      "uri_parameters": {
+        "userId": {
+          "type": "integer"
+        }
+      },
+      "request_fields": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "delete": {
+      "uri": "user/%d",
+      "method": "DELETE",
+      "description": "Delete user by id",
+      "authRoute" : true,
+      "uri_parameters": {
+        "userId": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "dentist": {
+    "get": {
+      "uri": "dentist",
+      "method": "GET",
+      "description": "Get dentist using body parameters with filter",
+      "authRoute" : true
+    },
+    "getId": {
+      "uri": "dentist/%d",
+      "method": "GET",
+      "description": "Get dentist by id",
+      "authRoute" : true,
+      "uri_parameters": {
+        "dentistId": {
+          "type": "integer"
+        }
+      }
+    },
+    "post": {
+      "uri": "dentist",
+      "method": "POST",
+      "description": "Insert a new dentist",
+      "authRoute" : true,
+      "request_fields": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "docNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "put": {
+      "uri": "dentist/%d",
+      "method": "PUT",
+      "description": "Update dentist by id",
+      "authRoute" : true,
+      "uri_parameters": {
+        "dentistId": {
+          "type": "integer"
+        }
+      },
+      "request_fields": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "docNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "delete": {
+      "uri": "dentist/%d",
+      "method": "DELETE",
+      "description": "Delete dentist by id",
+      "authRoute" : true,
+      "uri_parameters": {
+        "dentistId": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "patient": {
+    "get": {
+      "uri": "patient",
+      "method": "GET",
+      "description": "Get patient using body parameters as filter",
+      "authRoute" : true
+    },
+    "getId": {
+      "uri": "patient/%d",
+      "method": "GET",
+      "description": "Get patient by id",
+      "authRoute" : true,
+      "uri_parameters": {
+        "patientId": {
+          "type": "integer"
+        }
+      }
+    },
+    "post": {
+      "uri": "patient",
+      "method": "POST",
+      "description": "Insert a new patient",
+      "authRoute" : true,
+      "request_fields": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "docNumber": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "mobileNumber": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "zipCode": {
+          "type": "string"
+        }
+      }
+    },
+    "put": {
+      "uri": "patient/%d",
+      "method": "PUT",
+      "description": "Update patient by id",
+      "authRoute" : true,
+      "uri_parameters": {
+        "patientId": {
+          "type": "integer"
+        }
+      },
+      "request_fields": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "docNumber": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "mobileNumber": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "zipCode": {
+          "type": "string"
+        }
+      }
+    },
+    "delete": {
+      "uri": "patient/%d",
+      "method": "DELETE",
+      "description": "Delete patient by id",
+      "authRoute" : true,
+      "uri_parameters": {
+        "patientId": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "schedule": {
+    "get": {
+      "uri": "schedule",
+      "method": "GET",
+      "description": "Get schedule using body parameters with filter",
+      "authRoute" : true
+    },
+    "getId": {
+      "uri": "schedule/%d",
+      "method": "GET",
+      "description": "Get schedule by id",
+      "authRoute" : true,
+      "uri_parameters": {
+        "scheduleId": {
+          "type": "integer"
+        }
+      }
+    },
+    "post": {
+      "uri": "schedule",
+      "method": "POST",
+      "description": "Insert a new schedule",
+      "authRoute" : true,
+      "request_fields": {
+        "idPatient": {
+          "type": "integer"
+        },
+        "dateTimeBegin": {
+          "type": "date"
+        },
+        "dateTimeEmd": {
+          "type": "date"
+        },
+        "observation": {
+          "type": "string"
+        }
+      }
+    },
+    "put": {
+      "uri": "schedule/%d",
+      "method": "PUT",
+      "description": "Update schedule by id",
+      "authRoute" : true,
+      "uri_parameters": {
+        "scheduleId": {
+          "type": "integer"
+        }
+      },
+      "request_fields": {
+        "idDentist": {
+          "type": "integer"
+        },
+        "idPatient": {
+          "type": "integer"
+        },
+        "dateTimeBegin": {
+          "type": "date"
+        },
+        "dateTimeEmd": {
+          "type": "date"
+        },
+        "observation": {
+          "type": "string"
+        }
+      }
+    },
+    "delete": {
+      "uri": "schedule/%d",
+      "method": "DELETE",
+      "description": "Delete schedule by id",
+      "authRoute" : true,
+      "uri_parameters": {
+        "scheduleId": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "auth": {
+    "signIn": {
+      "uri": "auth/signIn",
+      "method": "POST",
+      "description": "Sign in and return a auth-token",
+      "authRoute" : false,
+      "request_fields": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "forgot": {
+      "uri": "auth/forgot",
+      "method": "POST",
+      "description": "Send an email with a link to reset the user password",
+      "authRoute" : false,
+      "request_fields": {
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "forgotCheck": {
+      "uri": "auth/forgot/check",
+      "method": "GET",
+      "description": "Check if the token is valid",
+      "authRoute" : false,
+      "request_fields": {
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "forgotReset": {
+      "uri": "auth/forgot/reset",
+      "method": "POST",
+      "description": "Reset password",
+      "authRoute" : false,
+      "request_fields": {
+        "token": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "resendActivationEmail": {
+      "uri": "auth/account/activation/resend",
+      "method": "POST",
+      "description": "Resend activation email",
+      "authRoute" : false,
+      "request_fields": {
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "activateAccount": {
+      "uri": "auth/account/activation",
+      "method": "POST",
+      "description": "Resend activation email",
+      "authRoute" : false,
+      "request_fields": {
+        "token": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

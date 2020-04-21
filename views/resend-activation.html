@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header"> {function="L('interface_label_forgotPassword')"}<br></div>
+          <div class="card-header">{function="L('interface_label_resendActivationCode')"}<br></div>
             {if="$error !== ''"}
             <div class="alert alert-danger" role="alert">
               {$error}
@@ -12,15 +12,15 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-md-12">
-                  <form action="/account/forgot" method="POST" data-js="login-form-main">
+                  <form action="/account/activate" method="POST" data-js="login-form-main">
                     <div class="form-group">
                       <label>{function="L('interface_label_email')"}</label>
-                      <input type="email" class="form-control" data-js="login-inp-email" placeholder="{function="L('interface_label_email')"}" name="email">
+                      <input type="email" class="form-control signup-input" placeholder="{function="L('interface_label_email')"}" data-js="activation-inp-email" name="email">
                     </div>
                     <div class="invalid-feedback">
                       This field is required.
                     </div>
-                    <button class="btn btn-success" data-js="login-btn-send">{function="L('interface_button_send')"} <br></button>
+                    <button class="btn btn-success" data-js="forgot-btn-save">{function="L('interface_button_resend')"}<br></button>
                     <a href="/account/signin" class="btn btn-primary pull-right" role="button" aria-pressed="true">{function="L('interface_button_signIn')"}</a>
                   </form>
                 </div>

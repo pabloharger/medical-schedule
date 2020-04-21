@@ -1,31 +1,41 @@
 <div class="py-2">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">Redefine your password<br></div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                        	<form action="/forgot/reset" method="POST" data-js="login-form-main">
-												<div class="form-group">
-		                      						<label>Password</label>
-                                                    <input type="hidden" name="code" value="{$code}">
-		                      						<input type="password" class="form-control register-input" placeholder="Password" data-js="register-inp-password" name="password">
-		                      						<div class="invalid-feedback"> This field is required. </div>
-		                    					</div>
-		                    					<button class="btn btn-success" data-js="forgot-btn-save">Save <br></button>
-		                    				</form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">{function="L('interface_resetPassowrd_redefinePassword')"}<br></div>
+            {if="$error !== ''"}
+            <div class="alert alert-danger" role="alert">
+              {$error}
             </div>
+            {/if}
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <form action="/account/forgot/reset" method="POST" data-js="login-form-main">
+                    <div class="form-group">
+                      <label>{function="L('interface_label_password')"}</label>
+                      <input type="hidden" name="token" value="{$token}">
+                      <input type="password" class="form-control signup-input" placeholder="{function="L('interface_label_password')"}" data-js="signup-inp-password" name="password">
+                      <div class="invalid-feedback">
+                        This field is required.
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>{function="L('interface_label_repeatPassword')"}</label>
+                      <input type="password" class="form-control signup-input" placeholder="Repeat Password" data-js="signup-inp-repeat-password" name="password_confirmation">
+                      <div class="invalid-feedback">
+                        This field is required.
+                      </div>
+                    </div>
+                    <button class="btn btn-success" data-js="forgot-btn-save">{function="L('interface_button_save')"}<br></button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

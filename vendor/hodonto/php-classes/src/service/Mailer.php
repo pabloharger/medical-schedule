@@ -1,6 +1,6 @@
 <?php 
 
-namespace HOdonto;
+namespace HOdonto\Service;
 
 use Rain\Tpl;
 

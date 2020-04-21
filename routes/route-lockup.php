@@ -8,15 +8,14 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 $app->group('/lockup', function (RouteCollectorProxy $group) {
 
-	$group->post('/dentist', function (Request $request, Response $response, $args) {
-		if (isset($_POST['q']))
-			echo Dentist::lockUp($_POST['q']);
+	$group->get('/dentist', function (Request $request, Response $response) {
+  	if (isset($_GET['q'])) echo Dentist::lockUp($_GET['q']);
 		return $response;
 	});
 
-	$group->post('/patient', function (Request $request, Response $response, $args) {
-		if (isset($_POST['q']))
-			echo Patient::lockUp($_POST['q']);
+	$group->get('/patient', function (Request $request, Response $response) {
+		if (isset($_GET['q']))
+			echo Patient::lockUp($_GET['q']);
 			return $response;
 	});
 });

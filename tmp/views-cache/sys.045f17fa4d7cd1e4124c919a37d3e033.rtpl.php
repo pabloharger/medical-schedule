@@ -1,4 +1,4 @@
-<div class="modal" tabindex="-1" role="dialog" id="my-modal">
+<?php if(!class_exists('Rain\Tpl')){exit;}?><div class="modal" tabindex="-1" role="dialog" id="my-modal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

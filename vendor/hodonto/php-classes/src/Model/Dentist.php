@@ -2,114 +2,82 @@
 
 namespace HOdonto\Model;
 
-use \HOdonto\DB\Sql;
-use \HOdonto\Model;
+use \HOdonto\Model\Model;
+use \HOdonto\API\Api;
 
-	class Dentist extends Model
-	{
+class Dentist extends Model
+{
 
-		public static function lockUp($search)
-		{
-			$search = strtoupper($search);
-			$data = array();
+  public static function lockUp($search)
+  {
+    $res = Api::run(Api::getRoutes()->dentist->get, ['firstName' => [ '$substring' => $search ]]);
 
-			$sql = new Sql();
-			$results = $sql->select('
-				SELECT d.id_dentist, d.name
-				FROM tb_dentists d
-				WHERE UPPER(d.name) LIKE :name
-			', Array(
-				':name'=> '%' . $search . '%'
-			));
+    if ($res['status']['code'] == 200) {
+      $data = Array();
+      $data['items'] = [];
 
-			$data = Array();
-			$data['items'] = [];
+      foreach ($res['response'] as $row) {
+        array_push(
+          $data['items'],
+          Array(
+            'id'=>$row['id'],
+            'text'=>$row['firstName']
+        ));
+      }
+    }
+    return json_encode($data);
+  }
 
-			foreach ($results as $row) {				
-				array_push(
-					$data['items'],
-					Array(
-						'id'=>$row['id_dentist'],
-						'text'=>$row['name']
-					)
-				);
-			}
-			return json_encode($data);
-		}
+  public function get($idDentist)
+  {
+    $res = Api::run(Api::formatRouteUri(Api::getRoutes()->dentist->getId, $idDentist));
 
-		public function get($idDentist)
-		{
-			$sql = new Sql();
+    $this->setcode(0);
+    if ($res['status']['code'] == 200) {
+      $this->setValues($res['response']);
+    } else {
+      $this->setcode(1);
+      $this->setmessage($res['status']['message']);
+    }
+    return $this->getValues();
+  }
 
-			$result = $sql->select("
-				SELECT *
-				FROM tb_dentists
-				WHERE id_dentist = :id_dentist
-			", Array(
-				'id_dentist'=>$idDentist
-			));
+  public function post()
+  {
+    $data = $this->getvalues();
+    unset($data['id']);
+    $res = Api::run(Api::getRoutes()->dentist->post, $data);
 
-			if (count($result) > 0) {
-				$this->setValues($result[0]);
-				$this->setcode(0);
-			} else {
-				$this->setCode(1);
-				$this->setmessage("Dentist code $idDentist not found!");
-			}
-		}
+    if ($res['status']['code'] == 201) {
+      $this->setcode(0);
+      $this->setmessage(L('interface_info_dentistSaved'));
+      $this->setValues($res['response']);
+    } else {
+      $this->setcode(1);
+      $this->setmessage($res['status']['message']);
+    }
+    return $this->getValues();
+  }
 
-		public function save()
-		{
+  public function put()
+  {
+    $res = Api::run(Api::formatRouteUri(Api::getRoutes()->dentist->put, (int)$this->getid()), $this->getvalues());
 
-			if ((int)$this->getid_dentist() === 0) {
-				$query = '
-					INSERT INTO tb_dentists (name, doc_number)
-					VALUES (:name, :doc_number)
-				';
-			} else {
-				$query = '
-					UPDATE tb_dentists
-					SET name = :name,
-						doc_number = :doc_number
-					WHERE id_dentist = :id_dentist
-				';
-				
-				$data[':id_dentist'] = $this->getid_dentist();
-			}
+    if ($res['status']['code'] == 201) {
+      $this->setcode(0);
+      $this->setmessage(L('interface_info_dentistSaved'));
+    } else {
+      $this->setcode(1);
+      $this->setmessage($res['status']['message']);
+    }
+    return $this->getValues();
+  }
 
-			$data[':name'] = $this->getname();
-			$data[':doc_number'] = $this->getdoc_number();
+  public function delete($idDentist)
+  {
+    Api::run(Api::formatRouteUri(Api::getRoutes()->dentist->delete, $idDentist));
+  }
 
-			$sql = new Sql();
-
-			$sql->query($query, $data);
-			
-			if ((int)$this->getid_dentist() === 0) {
-				$result = $sql->select('
-					SELECT *
-					FROM tb_dentists
-					WHERE id_dentist = LAST_INSERT_ID()
-				');
-
-				if (count($result) > 0)
-					$this->setValues($result[0]);
-			}
-
-			$this->setcode(0);
-			$this->setmessage('Dentist saved!');
-		}
-
-		public function delete($idDentist)
-		{
-			$sql = new Sql();
-			$sql->query('
-				DELETE FROM tb_dentists
-				WHERE id_dentist = :id_dentist
-			', Array(
-				':id_dentist'=>$idDentist
-			));
-		}
-
-	}
+}
 
 ?>

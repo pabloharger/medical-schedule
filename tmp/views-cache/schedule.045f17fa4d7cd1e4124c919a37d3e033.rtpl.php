@@ -1,9 +1,9 @@
-<div class="py-2">
+<?php if(!class_exists('Rain\Tpl')){exit;}?><div class="py-2">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header"> {function="L('header_menu_schedule')"}<br>
+          <div class="card-header"> <?php echo L('header_menu_schedule'); ?><br>
           </div>
           <div class="card-body">
             <div class="row">
@@ -22,7 +22,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">{function="L('interface_schedule_addSchedule')"}</h5>
+        <h5 class="modal-title"><?php echo L('interface_schedule_addSchedule'); ?></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -33,47 +33,47 @@
             <div data-js="schedule-form-add" action="#">
               <input type="hidden" class="schedule-input" data-js="schedule-inp-id">
               <div class="form-group">
-                <label>{function="L('header_menu_dentist')"}</label>
+                <label><?php echo L('header_menu_dentist'); ?></label>
                 <select class="schedule-select form-control" data-js="schedule-sel-dentist"></select>
                 <div class="invalid-feedback">
                     You need to select the dentist.
                 </div>
               </div>
               <div class="form-group">
-                  <label>{function="L('header_menu_patient')"}</label>
+                  <label><?php echo L('header_menu_patient'); ?></label>
                   <select class="schedule-select form-control" data-js="schedule-sel-patient"></select>
                   <div class="invalid-feedback">
                       You need to select the patient.
                   </div>
               </div>
               <div class="form-group">
-                  <label>{function="L('interface_schedule_initialTime')"}</label>
+                  <label><?php echo L('interface_schedule_initialTime'); ?></label>
                   
-                  <input type="text" placeholder="{function="L('interface_schedule_initialTime')"}" class="form-control datetimepicker-input" data-js="schedule-inp-date-initial" id="scheduleInpDateInicial" data-toggle="datetimepicker" data-target="#scheduleInpDateInicial"/>
+                  <input type="text" placeholder="<?php echo L('interface_schedule_initialTime'); ?>" class="form-control datetimepicker-input" data-js="schedule-inp-date-initial" id="scheduleInpDateInicial" data-toggle="datetimepicker" data-target="#scheduleInpDateInicial"/>
                   <div class="invalid-feedback">
                     You need to set the initial time.
                   </div>
               </div>
               </div>
               <div class="form-group">
-                  <label>{function="L('interface_schedule_finalTime')"}</label>
-                  <input type="text" placeholder="{function="L('interface_schedule_finalTime')"}" class="form-control datetimepicker-input" data-js="schedule-inp-date-final" id="scheduleInpDateFinal" data-toggle="datetimepicker" data-target="#scheduleInpDateFinal"/>
+                  <label><?php echo L('interface_schedule_finalTime'); ?></label>
+                  <input type="text" placeholder="<?php echo L('interface_schedule_finalTime'); ?>" class="form-control datetimepicker-input" data-js="schedule-inp-date-final" id="scheduleInpDateFinal" data-toggle="datetimepicker" data-target="#scheduleInpDateFinal"/>
                   <div class="invalid-feedback">
                       You need to set the final time.
                   </div>
               </div>
               <div class="form-group">
-                  <label>{function="L('interface_schedule_obs')"}</label>
-                  <input type="text" class="form-control schedule-input" placeholder="{function="L('interface_schedule_obs')"}" data-js="schedule-inp-obs">
+                  <label><?php echo L('interface_schedule_obs'); ?></label>
+                  <input type="text" class="form-control schedule-input" placeholder="<?php echo L('interface_schedule_obs'); ?>" data-js="schedule-inp-obs">
               </div>
             </form>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-js="schedule-dialog-del">{function="L('interface_button_delete')"}</button>
-        <button type="button" class="btn btn-primary" data-js="schedule-dialog-add">{function="L('interface_button_add')"}</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">{function="L('interface_button_close')"}</button>
+        <button type="button" class="btn btn-danger" data-js="schedule-dialog-del"><?php echo L('interface_button_delete'); ?></button>
+        <button type="button" class="btn btn-primary" data-js="schedule-dialog-add"><?php echo L('interface_button_add'); ?></button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo L('interface_button_close'); ?></button>
       </div>
     </div>
   </div>

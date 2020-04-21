@@ -1,6 +1,6 @@
 (function(){
   var appSchedule = (function scheduleController(){
-    var appDescription = 'Patient';
+    var appDescription = 'Schedule';
     var $schedule = $('[data-js="schedule-schedule"]');
     var $scheduleDialog = $('[data-js="schedule-dialog"]');
     var $inpId = $('[data-js="schedule-inp-id"]');
@@ -33,41 +33,41 @@
         titleFormat: 'DD/MM/YYYY',
         columnHeaderFormat: 'DD/MM',
         eventClick: scheduleClickHandler,
-        eventResize: scheduleRedizeHandler,
+        eventResize: scheduleResizeHandler,
         eventDrop: scheduleEventDropHandler,
         dayClick: scheduleDayClickHandler,
-        events: fillCalendar
+        events: fillCalendar,
+        locale: utilCookie.getCookie('langInitials')
       });
 
-			$selDentist.select2({
-				ajax: {
-					type : "POST",
-					url : "/lockup/dentist",
-					dataType : 'json',
-					delay : 250,
-					data : 
-						function (params) {
-							return {
-									q : params.term,
-									page : params.page,
-								};
-							},
-					processResults: function (data, params) {
-						params.page = params.page || 1;
+      $selDentist.select2({
+        ajax: {
+          type : "GET",
+          url : "/lockup/dentist",
+          dataType : 'json',
+          delay : 250,
+          data : 
+            function (params) {
+              return {
+                  q : params.term,
+                  page : params.page,
+                };
+              },
+          processResults: function (data, params) {
+            params.page = params.page || 1;
 
-						return {
-							results : data.items,
-							pagination: {
-								more: (params.page * 30) < data.total_count
-							}
-						};
-					},
-					cache: true
-				},
-				escapeMarkup: function (markup) { return markup; },
-				minimumInputLength: 1,
+            return {
+              results : data.items,
+              pagination: {
+                more: (params.page * 30) < data.total_count
+              }
+            };
+          },
+          cache: true
+        },
+        escapeMarkup: function (markup) { return markup; },
+        minimumInputLength: 1,
         width: '100%',
-        placeholder: 'Select a Dentist...'
       }).on("select2:opening", 
         function(){
           $scheduleDialog.removeAttr("tabindex", "-1");
@@ -77,35 +77,34 @@
         }
       );
 
-			$selPatient.select2({
-				ajax: {
-					type : "POST",
+      $selPatient.select2({
+        ajax: {
+          type : "GET",
           url : "/lockup/patient",
-					dataType : 'json',
-					delay : 250,
-					data : 
-						function (params) {
-							return {
-									q : params.term,
-									page : params.page
-								};
-							},
-					processResults: function (data, params) {
-						params.page = params.page || 1;
+          dataType : 'json',
+          delay : 250,
+          data : 
+            function (params) {
+              return {
+                  q : params.term,
+                  page : params.page
+                };
+              },
+          processResults: function (data, params) {
+            params.page = params.page || 1;
 
-						return {
-							results : data.items,
-							pagination: {
-								more: (params.page * 30) < data.total_count
-							}
-						};
-					},
-					cache: true
-				},
-				escapeMarkup: function (markup) { return markup; },
-				minimumInputLength: 1,
+            return {
+              results : data.items,
+              pagination: {
+                more: (params.page * 30) < data.total_count
+              }
+            };
+          },
+          cache: true
+        },
+        escapeMarkup: function (markup) { return markup; },
+        minimumInputLength: 1,
         width: '100%',
-        placeholder: 'Select a patient...'
       }).on("select2:opening", 
         function(){
           $scheduleDialog.removeAttr("tabindex", "-1");
@@ -114,6 +113,9 @@
           $scheduleDialog.attr("tabindex", "-1");
         }
       );
+
+      // $selDentist.select2.defaults.set('language', utilCookie.getCookie('langInitials'));
+      // $selPatient.select2.defaults.set('language', utilCookie.getCookie('langInitials'));
 
       $inpTimeInit.datetimepicker({format: 'DD/MM/YYYY HH:mm'});
       $inpTimeFinal.datetimepicker({format: 'DD/MM/YYYY HH:mm'});
@@ -134,24 +136,22 @@
     }
 
     function delDialog(){
+      const callBack = (data) => {
+        var result = JSON.parse(data);
+        $scheduleDialog.modal('hide');
+        if (result.code === 0) {
+          $schedule.fullCalendar('removeEvents', [ Number( $inpId.val() ) ] );
+        }
+        util.message(appDescription, result.message);
+      }
+
       if (confirm('Are you sure?')) {
-        $.post( 
-          'schedule/delete',
-          {
-            id_schedule : Number($inpId.val())
-          },
-          function( data ) {
-            var result = JSON.parse(data);
-
-            $scheduleDialog.modal('hide');
-
-            if (result.code === 0) {
-              $schedule.fullCalendar('removeEvents', [ Number( $inpId.val() ) ] );
-            }
-
-            util.message(appDescription, result.message);
-          });
-
+        $.ajax({
+          url: '/schedule/' + Number($inpId.val()),
+          type: 'DELETE',
+          success: callBack,
+          error: callBack
+        });
       }
     }
 
@@ -187,17 +187,12 @@
     
     function validateTimeFinal(){
       if ($inpTimeFinal.val() === ''){
-        //utilDOM.addInvalidFeedback  ($inpTimeFinal, "You need set the final time.", "is-invalid");
-        //$inpTimeFinal.parent().find('.invalid-feedback').html("You need set the final time.");
         utilDOM.addClassIfNotExists($inpTimeFinal, 'is-invalid');
         return false
       } 
 
       if (($inpTimeInit.val() !== '') && ($inpTimeInit.val() >= $inpTimeFinal.val())){  
         utilDOM.addInvalidFeedback($inpTimeFinal, "Final date can not be greater than the starting date", "is-invalid");
-        // utilDOM.addClassIfNotExists($inpTimeFinal, 'is-invalid');
-        // if ($inpTimeFinal.parent().find('.invalid-feedback') !== undefined)
-        //   $inpTimeFinal.parent().find('.invalid-feedback').html("Final date can not be greater than the starting date");
         return false;
       }
 
@@ -214,48 +209,64 @@
     }
 
     function addSchedule(){
-      $.post( 
-        'schedule/save',
-        {
-          id_schedule : Number($inpId.val()),
-          id_dentist : $selDentist.val(),
-          id_patient : $selPatient.val(),
-          date_time_begin : utilMoment.getInternalFormatedDateTime($inpTimeInit.val()),
-          date_time_end : utilMoment.getInternalFormatedDateTime($inpTimeFinal.val()),
+      const callBack = (data) => {
+        var result = JSON.parse(data);
+        if (result.code === 0) {
+          //loading_off();
+          $inpId.val(result.id);
+          addCalendarSchedule({
+            id: result.id,
+            dentist: {
+              firstName: result.dentist.firstName
+            },
+            patient: {
+              firstName: result.patient.firstName
+            },
+            dateTimeBegin: result.dateTimeBegin,
+            dateTimeEnd: result.dateTimeEnd,
+            observation: result.observation
+          });
+
+          $scheduleDialog.modal('hide');
+          //clearDialog();
+        } else {
+          //loading_off();
+          util.message(appDescription, result.message);
+        }
+      }
+      $route = '/schedule/';
+      $method = 'POST';
+
+      if (Number($inpId.val()) > 0) {
+        $route += Number($inpId.val());
+        $method = 'PUT';
+      }
+
+      $.ajax({
+        url: $route,
+        type: $method,
+        data: {
+          id : Number($inpId.val()),
+          idDentist : $selDentist.val(),
+          idPatient : $selPatient.val(),
+          dateTimeBegin : utilMoment.getInternalFormatedDateTime($inpTimeInit.val()),
+          dateTimeEnd : utilMoment.getInternalFormatedDateTime($inpTimeFinal.val()),
           observation : $inpObservation.val().trim()
         },
-        function( data ) {
-          var result = JSON.parse(data);
-          if (result.code === 0) {
-            //loading_off();
-            $inpId.val(result.id_schedule);
-            addCalendarSchedule({
-              id_schedule: Number($inpId.val()),
-              name_dentist: $selDentist.children()[0].innerText,
-              name_patient: $selPatient.children()[0].innerText,
-              date_time_begin: utilMoment.getInternalFormatedDateTime($inpTimeInit.val()),
-              date_time_end: utilMoment.getInternalFormatedDateTime($inpTimeFinal.val()),
-              observation: $inpObservation.val().trim()
-            });
-            $scheduleDialog.modal('hide');
-            //clearDialog();
-          } else {
-            //loading_off();
-            util.message(appDescription, result.message);
-          }
-        }
-      );
+        success: callBack,
+        error: callBack
+      });
     }
 
     function fillCalendar(start, end, timezone, callback){
         $.get({
-          url: 'schedule/get',
+          url: '/schedule/',
           data: {
-            start: utilMoment.getInternalFormatedDateTime(start),
-            end: utilMoment.getInternalFormatedDateTime(end)
+            dateTimeStart: utilMoment.getInternalFormatedDateTime(start),
+            dateTimeEnd: utilMoment.getInternalFormatedDateTime(end)
           },
           dataType: 'json',
-          success: function(data) {
+          success: (data) => {
             $events = Array.prototype.map.call(data, function(item){
               return formatEvent(item);
             })
@@ -266,13 +277,13 @@
 
     function formatEvent(event) {
       return {
-          id : event.id_schedule,
+          id : event.id,
           title : 
-            'Dr. ' + event.name_dentist + '\n' + 
-            event.name_patient  + '\n' + 
-            event.observation,
-          start : event.date_time_begin,
-          end : event.date_time_end
+            'Dr. ' + event.dentist.firstName + '\n' +
+            event.patient.firstName  + '\n' +
+            (event.observation === null ? '': event.observation),
+          start : event.dateTimeBegin,
+          end : event.dateTimeEnd
         };
     }
 
@@ -306,31 +317,30 @@
       $scheduleDialog.modal();
     }
 
-    function fillDialog(id_schedule){
+    function fillDialog(id){
       $.get( 
-        'schedule/get/' + id_schedule,
+        '/schedule/' + id,
         function( data ) {
           var result = JSON.parse(data);
-          if (result.length > 0) {
-            result = result[0];
+          if (result.code == 0) {
             //loading_off();
-            $inpId.val(result.id_schedule);
-            utilForm.setSelect2($selDentist, result.id_dentist, result.name_dentist);
-            utilForm.setSelect2($selPatient, result.id_patient, result.name_patient);
-            $inpTimeInit.val(utilMoment.getInterfaceFormatedDateTime(result.date_time_begin));
-            $inpTimeFinal.val(utilMoment.getInterfaceFormatedDateTime(result.date_time_end));
-            $inpObservation.val(result.observation);
+            $inpId.val(result.id);
+            utilForm.setSelect2($selDentist, result.dentist.id, result.dentist.firstName);
+            utilForm.setSelect2($selPatient, result.patient.id, result.patient.firstName);
+            $inpTimeInit.val(utilMoment.getInterfaceFormatedDateTime(result.dateTimeBegin));
+            $inpTimeFinal.val(utilMoment.getInterfaceFormatedDateTime(result.dateTimeEnd));
+            $inpObservation.val((result.observation == null ? '' : result.observation));
             $scheduleDialog.modal();
             //clearDialog();
           } else {
             //loading_off();
-            util.message(appDescription, result.message,);
+            util.message(appDescription, result.message);
           }
         }
       );
     }
 
-    function scheduleRedizeHandler(event){
+    function scheduleResizeHandler(event){
       refreshSchedule(event.id, event.start.format(), event.end.format());
     }
 
@@ -338,22 +348,23 @@
       refreshSchedule(event.id, event.start.format(), event.end.format());
     }
 
-    function refreshSchedule($id_schedule, $initDateTime, $finalDateTime){
-      $.post( 
-        'schedule/refresh',
-        {
-          id_schedule : Number($id_schedule),
-          date_time_begin : $initDateTime,
-          date_time_end : $finalDateTime
+    function refreshSchedule($id, $initDateTime, $finalDateTime){
+      const callBack = (data) => {
+        var result = JSON.parse(data);
+        if (result.code > 0) util.message(appDescription, result.message);
+      }
+
+      $.ajax({
+        url: '/schedule/' + Number($id),
+        type: 'PUT',
+        data: {
+          id : Number($id),
+          dateTimeBegin : utilMoment.getInternalFormatedDateTimeFromCallendar($initDateTime),
+          dateTimeEnd : utilMoment.getInternalFormatedDateTimeFromCallendar($finalDateTime)
         },
-        function( data ) {
-          var result = JSON.parse(data);
-          if (result.code > 0) {
-            //loading_off();
-            util.message(appDescription, result.message);
-          }
-        }
-      );
+        success: callBack,
+        error: callBack
+      });
     }
 
     return {

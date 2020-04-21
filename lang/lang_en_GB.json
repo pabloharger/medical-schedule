@@ -1,0 +1,65 @@
+{
+  "header_clinicName": "Your Clinic",
+
+  "header_menu_dentist": "Dentist",
+  "header_menu_patient": "Patient",
+  "header_menu_schedule": "Schedule",
+  "header_menu_signOut": "Sign Out",
+
+  "index_welcome": "Welcome, %s!",
+
+  "interface_button_save": "Save",
+  "interface_button_new": "New",
+  "interface_button_clear": "Clear",
+  "interface_button_delete": "Delete",
+  "interface_button_signIn": "Sign In",
+  "interface_button_send": "Send",
+  "interface_button_resend": "Resend",
+  "interface_button_close": "Close",
+  "interface_button_add": "Add",
+
+  "interface_label_signUp": "Sign Up",
+  "interface_label_email": "Email",
+  "interface_label_password": "Password",
+  "interface_label_repeatPassword": "Repeat Password",
+  "interface_label_firstName": "First Name",
+  "interface_label_lastName": "Last Name",
+  "interface_label_forgotPassword": "Forgot your password?",
+  "interface_label_resendActivationCode": "Resend activation code",
+  "interface_label_docNumber": "Doc. Number",
+
+  "interface_waring_informEmail": "Inform the email",
+  "interface_waring_informPassword": "Inform the password",
+  "interface_waring_informFirstName": "Inform the first name",
+  "interface_waring_informLastName": "Inform the last name",
+  "interface_waring_informDentist": "Inform the dentist",
+  "interface_waring_informPatient": "Inform the patient",
+  "interface_waring_informInitialTime": "Inform the initial time",
+  "interface_waring_informFinalTime": "Inform the final time",
+  
+  "interface_info_userHasBeenRegistered": "User has been registered, please activate your account with the email which has been sent to your email",
+  "interface_info_passwordHasBeenSentFollowInstructions": "E-mail has been sent! Verify your email and follow the instructions",
+  "interface_info_passwordChangedSuccessfully": "Password changed successfully!",
+  "interface_info_accountActivatedSuccessfully": "your account has been activated successfully",
+  "interface_info_dentistSaved": "Dentist saved",
+  "interface_info_patientSaved": "Patient saved",
+  "interface_info_ScheduleSaved": "Schedule saved",
+
+  "interface_signIn_signIn": "Sign In",
+
+  "interface_resetPassowrd_redefinePassword": "Redefine your password",
+
+  "interface_dentist_selectADentist": "Select a dentist",
+
+  "interface_patient_phoneNumber": "Phone Number",
+  "interface_patient_mobileNumber": "Mobile Phone Number",
+  "interface_patient_address": "Address",
+  "interface_patient_city": "City",
+  "interface_patient_state": "State",
+  "interface_patient_zipCode": "Zip Code",
+
+  "interface_schedule_addSchedule": "Add Schedule",
+  "interface_schedule_initialTime": "Initial Time",
+  "interface_schedule_finalTime": "Final Time",
+  "interface_schedule_obs": "Observation"
+}

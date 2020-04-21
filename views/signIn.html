@@ -1,0 +1,56 @@
+<div class="py-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header"> {function="L('interface_signIn_signIn')"}<br></div>
+            {if="$error !== ''"}
+              <div class="alert alert-danger" role="alert">
+                {$error}
+              </div>
+            {/if}
+
+            {if="$info !== ''"}
+              <div class="alert alert-success" role="alert">
+                {$info}
+              </div>
+            {/if}
+
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <form action="/account/signin" method="POST" data-js="login-form-main">
+                    <div class="form-group">
+                      <label>{function="L('interface_label_email')"}</label>
+                      <input type="email" class="form-control" data-js="login-inp-email" placeholder="{function="L('interface_label_email')"}" name="email">
+                    </div>
+                    <div class="form-group">
+                      <label>{function="L('interface_label_password')"}</label>
+                      <input type="password" class="form-control login-input" placeholder="{function="L('interface_label_password')"}" data-js="login-inp-password" name="password">
+                    </div>
+
+                    <div class="form-group">
+                      <div class="row ml-1">
+                        <small class="form-text text-muted"><a href="/account/forgot">{function="L('interface_label_forgotPassword')"}</a></small>
+                        <div class="ml-auto mr-3">
+                          <small class="form-text text-muted"><a href="/account/activate">{function="L('interface_label_resendActivationCode')"}</a></small>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <button class="btn btn-success" data-js="login-btn-login">{function="L('interface_button_signIn')"} <br></button>
+                        <a class="btn btn-info float-right" data-js="login-btn-signup" href="/account/signup">{function="L('interface_label_signUp')"}</a>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
