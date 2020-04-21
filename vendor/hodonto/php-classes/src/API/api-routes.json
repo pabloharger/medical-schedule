@@ -337,7 +337,7 @@
   },
   "auth": {
     "signIn": {
-      "uri": "auth/signIn",
+      "uri": "auth/signin",
       "method": "POST",
       "description": "Sign in and return a auth-token",
       "authRoute" : false,
