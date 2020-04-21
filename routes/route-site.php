@@ -122,19 +122,19 @@ $app->group('', function (RouteCollectorProxy $group) {
   
     });
 
-    $group->get('/', function(Request $request, Response $response, $args){
-      if (!User::checkSignIn()){
-        header('Location: /account/signin');
-        exit;
-      }
-  
-      $page = new Page();
-      $page->setTpl('index', [
-        'name' => $_SESSION[User::SESSION]['firstName']
-      ]);
-      return $response;
-    });
+  });
 
+  $group->get('/', function(Request $request, Response $response, $args){
+    if (!User::checkSignIn()){
+      header('Location: /account/signin');
+      exit;
+    }
+
+    $page = new Page();
+    $page->setTpl('index', [
+      'name' => $_SESSION[User::SESSION]['firstName']
+    ]);
+    return $response;
   });
 
 });
