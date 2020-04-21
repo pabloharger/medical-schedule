@@ -43,6 +43,8 @@ vendor/*
 ### Rain\Tpl tmp files  ###
 tmp/views-cache/*
 tmp/i18n-cache/*
+!tmp/views-cache/README.md
+!tmp/i18n-cache/README.md
 
 ### .ENV file ###
 .ENV
