@@ -34,6 +34,12 @@ require_once("routes/route-dentist.php");
 require_once("routes/route-patient.php");
 require_once("routes/route-schedule.php");
 
+$routes = $group->getRouteCollector()->getRoutes();
+echo 'aq<pre>';
+var_dump($routes);
+echo '</pre>';
+exit;
+
 $app->run();
 
 ?>

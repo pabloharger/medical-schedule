@@ -8,18 +8,12 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 $app->group('', function (RouteCollectorProxy $group) {
 
-  $routes = $group->getRouteCollector()->getRoutes();
-  echo 'aq<pre>';
-  var_dump($routes);
-  echo '</pre>';
-  exit;
-
   $group->get('/', function(Request $request, Response $response, $args){
-    echo 'aq2';exit;
-    if (!User::checkSignIn()){
-      header('Location: /account/signin');
-      exit;
-    }
+    echo 'aq2';
+    // if (!User::checkSignIn()){
+    //   header('Location: /account/signin');
+    //   exit;
+    // }
 
     $page = new Page();
     $page->setTpl('index', [
@@ -145,11 +139,5 @@ $app->group('', function (RouteCollectorProxy $group) {
   });
 
 });
-
-$routes = $app->getRouteCollector()->getRoutes();
-  echo '<pre>';
-  var_dump($routes);
-  echo '</pre>';
-  exit;
 
 ?>
