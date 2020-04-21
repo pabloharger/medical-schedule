@@ -41,7 +41,8 @@ Temporary Items
 vendor/*
 
 ### Rain\Tpl tmp files  ###
-tmp/*
+tmp/views-cache/*
+tmp/i18n-cache/*
 
 ### .ENV file ###
 .ENV
