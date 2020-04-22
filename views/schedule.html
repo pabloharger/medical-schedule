@@ -36,14 +36,14 @@
                 <label>{function="L('header_menu_doctor')"}</label>
                 <select class="schedule-select form-control" data-js="schedule-sel-doctor"></select>
                 <div class="invalid-feedback">
-                    You need to select the doctor.
+                  {function="L('interface_label_fieldRequired')"}
                 </div>
               </div>
               <div class="form-group">
                   <label>{function="L('header_menu_patient')"}</label>
                   <select class="schedule-select form-control" data-js="schedule-sel-patient"></select>
                   <div class="invalid-feedback">
-                      You need to select the patient.
+                    {function="L('interface_label_fieldRequired')"}
                   </div>
               </div>
               <div class="form-group">
@@ -51,22 +51,21 @@
                   
                   <input type="text" placeholder="{function="L('interface_schedule_initialTime')"}" class="form-control datetimepicker-input" data-js="schedule-inp-date-initial" id="scheduleInpDateInicial" data-toggle="datetimepicker" data-target="#scheduleInpDateInicial"/>
                   <div class="invalid-feedback">
-                    You need to set the initial time.
+                    {function="L('interface_label_fieldRequired')"}
                   </div>
-              </div>
               </div>
               <div class="form-group">
                   <label>{function="L('interface_schedule_finalTime')"}</label>
                   <input type="text" placeholder="{function="L('interface_schedule_finalTime')"}" class="form-control datetimepicker-input" data-js="schedule-inp-date-final" id="scheduleInpDateFinal" data-toggle="datetimepicker" data-target="#scheduleInpDateFinal"/>
                   <div class="invalid-feedback">
-                      You need to set the final time.
+                    {function="L('interface_label_fieldRequired')"}
                   </div>
               </div>
               <div class="form-group">
                   <label>{function="L('interface_schedule_obs')"}</label>
                   <input type="text" class="form-control schedule-input" placeholder="{function="L('interface_schedule_obs')"}" data-js="schedule-inp-obs">
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>

@@ -59,7 +59,7 @@ $app->group('/schedule', function (RouteCollectorProxy $group) {
 
     if (!isset($args['id'])) {
       $schedule->setcode(1);
-      $schedule->setmessage('Incorrect argument "id".');
+      $schedule->setmessage(L('interface_waring_incorrectArgument'));
       echo json_encode($schedule->getValues());
       return $response;
     }
@@ -74,14 +74,14 @@ $app->group('/schedule', function (RouteCollectorProxy $group) {
 
     if (!isset($args['id'])) {
       $schedule->setcode(1);
-      $schedule->setmessage('Incorrect argument "id".');
+      $schedule->setmessage(L('interface_waring_incorrectArgument'));
       echo json_encode($schedule->getValues());
       return $response;
     }
     
     $schedule->delete((int)$args['id']);
     $schedule->setcode(0);
-    $schedule->setmessage('Doctor deleted!');
+    $schedule->setmessage(L('interface_info_ScheduleDeleted'));
     echo json_encode($schedule->getValues());
     return $response;
   });

@@ -114,9 +114,6 @@
         }
       );
 
-      // $selDoctor.select2.defaults.set('language', utilCookie.getCookie('langInitials'));
-      // $selPatient.select2.defaults.set('language', utilCookie.getCookie('langInitials'));
-
       $inpTimeInit.datetimepicker({format: 'DD/MM/YYYY HH:mm'});
       $inpTimeFinal.datetimepicker({format: 'DD/MM/YYYY HH:mm'});
     }
@@ -201,11 +198,12 @@
     }
 
     function validateData(){
-      var validate = validateDoctor();
-      validate = validatePatient() && validate;
-      validate = validateTimeInitial () && validateTimeFinal() && validate;
+      let valid = validateDoctor();
+      valid = validatePatient() && valid;
+      valid = validateTimeInitial() && valid;
+      valid = validateTimeFinal() && valid;
 
-      return validate;
+      return valid;
     }
 
     function addSchedule(){
@@ -314,7 +312,6 @@
     function scheduleClickHandler(calEvent){
       fillDialog(calEvent.id);
       $btnDel.show();
-      $scheduleDialog.modal();
     }
 
     function fillDialog(id){
@@ -324,6 +321,7 @@
           var result = JSON.parse(data);
           if (result.code == 0) {
             //loading_off();
+            clearDialog();
             $inpId.val(result.id);
             utilForm.setSelect2($selDoctor, result.doctor.id, result.doctor.firstName);
             utilForm.setSelect2($selPatient, result.patient.id, result.patient.firstName);

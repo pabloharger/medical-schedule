@@ -28,6 +28,7 @@
   "interface_label_forgotPassword": "Forgot your password?",
   "interface_label_resendActivationCode": "Resend activation code",
   "interface_label_docNumber": "Doc. Number",
+  "interface_label_fieldRequired": "This field is required",
 
   "interface_waring_informEmail": "Inform the email",
   "interface_waring_informPassword": "Inform the password",
@@ -37,6 +38,7 @@
   "interface_waring_informPatient": "Inform the patient",
   "interface_waring_informInitialTime": "Inform the initial time",
   "interface_waring_informFinalTime": "Inform the final time",
+  "interface_waring_incorrectArgument": "Incorrect argument 'ID'",
   
   "interface_info_userHasBeenRegistered": "User has been registered, please activate your account with the email which has been sent to your email",
   "interface_info_passwordHasBeenSentFollowInstructions": "E-mail has been sent! Verify your email and follow the instructions",
@@ -45,12 +47,13 @@
   "interface_info_doctorSaved": "Doctor saved",
   "interface_info_patientSaved": "Patient saved",
   "interface_info_ScheduleSaved": "Schedule saved",
+  "interface_info_doctorDeleted": "Doctor deleted",
+  "interface_info_patientDeleted": "Patient deleted",
+  "interface_info_ScheduleDeleted": "Schedule deleted",
 
   "interface_signIn_signIn": "Sign In",
 
   "interface_resetPassowrd_redefinePassword": "Redefine your password",
-
-  "interface_doctor_selectADoctor": "Select a doctor",
 
   "interface_patient_phoneNumber": "Phone Number",
   "interface_patient_mobileNumber": "Mobile Phone Number",

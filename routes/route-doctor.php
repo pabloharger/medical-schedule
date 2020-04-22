@@ -27,7 +27,7 @@ $app->group('/doctor', function (RouteCollectorProxy $group) {
 
     if (!isset($args['id'])) {
       $doctor->setcode(1);
-      $doctor->setmessage('Incorrect argument "id".');
+      $doctor->setmessage(L('interface_waring_incorrectArgument'));
       echo json_encode($doctor->getValues());
       return $response;
     }
@@ -44,14 +44,14 @@ $app->group('/doctor', function (RouteCollectorProxy $group) {
 
     if (!isset($args['id'])) {
       $doctor->setcode(1);
-      $doctor->setmessage('Incorrect argument "id".');
+      $doctor->setmessage(L('interface_waring_incorrectArgument'));
       echo json_encode($doctor->getValues());
       return $response;
     }
     
     $doctor->delete((int)$args['id']);
     $doctor->setcode(0);
-    $doctor->setmessage('Doctor deleted!');
+    $doctor->setmessage(L('interface_info_doctorDeleted'));
     echo json_encode($doctor->getValues());
     return $response;
   });

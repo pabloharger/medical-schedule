@@ -18,14 +18,14 @@
                       <input type="hidden" name="token" value="{$token}">
                       <input type="password" class="form-control signup-input" placeholder="{function="L('interface_label_password')"}" data-js="signup-inp-password" name="password">
                       <div class="invalid-feedback">
-                        This field is required.
+                        {function="L('interface_label_fieldRequired')"}
                       </div>
                     </div>
                     <div class="form-group">
                       <label>{function="L('interface_label_repeatPassword')"}</label>
                       <input type="password" class="form-control signup-input" placeholder="Repeat Password" data-js="signup-inp-repeat-password" name="password_confirmation">
                       <div class="invalid-feedback">
-                        This field is required.
+                        {function="L('interface_label_fieldRequired')"}
                       </div>
                     </div>
                     <button class="btn btn-success" data-js="forgot-btn-save">{function="L('interface_button_save')"}<br></button>

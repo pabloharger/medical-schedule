@@ -16,26 +16,26 @@
             			<div class="form-group">
               				<label>{function="L('interface_label_email')"}</label>
 							        <input type="email" class="form-control" data-js="signup-inp-email" placeholder="{function="L('interface_label_email')"}" name="email" value="{$regVal.email}">
-              			<div class="invalid-feedback"> This field is required. </div>
+              			<div class="invalid-feedback"> {function="L('interface_label_fieldRequired')"} </div>
             			</div>
         					<div class="form-group">
         						<label>{function="L('interface_label_password')"}</label>
         						<input type="password" class="form-control signup-input" placeholder="{function="L('interface_label_password')"}" data-js="signup-inp-password" name="password">
-        						<div class="invalid-feedback"> This field is required. </div>
+        						<div class="invalid-feedback"> {function="L('interface_label_fieldRequired')"} </div>
                   </div>
                   <div class="form-group">
         						<label>{function="L('interface_label_repeatPassword')"}</label>
         						<input type="password" class="form-control signup-input" placeholder="{function="L('interface_label_repeatPassword')"}" data-js="signup-inp-password" name="password_confirmation">
-        						<div class="invalid-feedback"> This field is required. </div>
+        						<div class="invalid-feedback"> {function="L('interface_label_fieldRequired')"} </div>
                   </div>
             			<div class="form-group">
               		  <label>{function="L('interface_label_firstName')"}</label>
 							      <input type="text" class="form-control" data-js="signup-inp-name" placeholder="{function="L('interface_label_firstName')"}" name="firstName" value="{$regVal.firstName}">
-                  <div class="invalid-feedback"> This field is required. </div>
+                  <div class="invalid-feedback"> {function="L('interface_label_fieldRequired')"} </div>
                   <div class="form-group">
               		  <label>{function="L('interface_label_lastName')"}</label>
 							      <input type="text" class="form-control" data-js="signup-inp-name" placeholder="{function="L('interface_label_lastName')"}" name="lastName" value="{$regVal.lastName}">
-              		<div class="invalid-feedback"> This field is required. </div>
+              		<div class="invalid-feedback"> {function="L('interface_label_fieldRequired')"} </div>
             		</div>
 
             		<button class="btn btn-success" data-js="signup-btn-signup">{function="L('interface_label_signUp')"} <br></button>

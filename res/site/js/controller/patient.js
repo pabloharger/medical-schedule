@@ -116,7 +116,9 @@
     }
 
     function validateForm(){
-      return validateFirstName() && validateLastName();
+      let valid = validateFirstName()
+      valid = validateLastName() && valid;
+      return valid;
     }
 
     function savePatient(){

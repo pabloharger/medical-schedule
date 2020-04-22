@@ -28,6 +28,7 @@
   "interface_label_forgotPassword": "¿Olvido la contraseña?",
   "interface_label_resendActivationCode": "Reenviar código de activación",
   "interface_label_docNumber": "Número Documento",
+  "interface_label_fieldRequired": "Este campo es requerido",
 
   "interface_waring_informEmail": "Ingrese su email",
   "interface_waring_informPassword": "Ingrese su contraseña",
@@ -45,12 +46,13 @@
   "interface_info_doctorSaved": "Doctor guardado",
   "interface_info_patientSaved": "Paciente guardado",
   "interface_info_ScheduleSaved": "Horario guardado",
+  "interface_info_doctorDeleted": "Doctor apagado",
+  "interface_info_patientDeleted": "Paciente apagado",
+  "interface_info_ScheduleDeleted": "Horario apagado",
 
   "interface_signIn_signIn": "Entrar",
 
   "interface_resetPassowrd_redefinePassword": "Restablece tu contraseña",
-
-  "interface_doctor_selectADoctor": "Seleccione um doctor",
 
   "interface_patient_phoneNumber": "Telefono",
   "interface_patient_mobileNumber": "Celular",
