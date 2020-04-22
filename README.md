@@ -19,4 +19,4 @@ Grant read/write permission to the folders tmp/views-cache and tmp/i18n-cache
 
 ### Heroku Deploy ###
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/pabloharger/hodonto)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/pabloharger/medical-schedule)
