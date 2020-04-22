@@ -30,7 +30,7 @@ require_once("routes/functions.php");
 require_once("routes/route-site.php");
 require_once("routes/route-auth.php");
 require_once("routes/route-lockup.php");
-require_once("routes/route-dentist.php");
+require_once("routes/route-doctor.php");
 require_once("routes/route-patient.php");
 require_once("routes/route-schedule.php");
 

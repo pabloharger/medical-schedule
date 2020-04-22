@@ -1,7 +1,8 @@
 {
+  "header_title": "Clinic Schedule",
   "header_clinicName": "Your Clinic",
 
-  "header_menu_dentist": "Dentist",
+  "header_menu_doctor": "Doctor",
   "header_menu_patient": "Patient",
   "header_menu_schedule": "Schedule",
   "header_menu_signOut": "Sign Out",
@@ -32,7 +33,7 @@
   "interface_waring_informPassword": "Inform the password",
   "interface_waring_informFirstName": "Inform the first name",
   "interface_waring_informLastName": "Inform the last name",
-  "interface_waring_informDentist": "Inform the dentist",
+  "interface_waring_informDoctor": "Inform the doctor",
   "interface_waring_informPatient": "Inform the patient",
   "interface_waring_informInitialTime": "Inform the initial time",
   "interface_waring_informFinalTime": "Inform the final time",
@@ -41,7 +42,7 @@
   "interface_info_passwordHasBeenSentFollowInstructions": "E-mail has been sent! Verify your email and follow the instructions",
   "interface_info_passwordChangedSuccessfully": "Password changed successfully!",
   "interface_info_accountActivatedSuccessfully": "your account has been activated successfully",
-  "interface_info_dentistSaved": "Dentist saved",
+  "interface_info_doctorSaved": "Doctor saved",
   "interface_info_patientSaved": "Patient saved",
   "interface_info_ScheduleSaved": "Schedule saved",
 
@@ -49,7 +50,7 @@
 
   "interface_resetPassowrd_redefinePassword": "Redefine your password",
 
-  "interface_dentist_selectADentist": "Select a dentist",
+  "interface_doctor_selectADoctor": "Select a doctor",
 
   "interface_patient_phoneNumber": "Phone Number",
   "interface_patient_mobileNumber": "Mobile Phone Number",

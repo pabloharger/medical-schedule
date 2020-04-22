@@ -77,28 +77,28 @@
       }
     }
   },
-  "dentist": {
+  "doctor": {
     "get": {
-      "uri": "dentist",
+      "uri": "doctor",
       "method": "GET",
-      "description": "Get dentist using body parameters with filter",
+      "description": "Get doctor using body parameters with filter",
       "authRoute" : true
     },
     "getId": {
-      "uri": "dentist/%d",
+      "uri": "doctor/%d",
       "method": "GET",
-      "description": "Get dentist by id",
+      "description": "Get doctor by id",
       "authRoute" : true,
       "uri_parameters": {
-        "dentistId": {
+        "doctorId": {
           "type": "integer"
         }
       }
     },
     "post": {
-      "uri": "dentist",
+      "uri": "doctor",
       "method": "POST",
-      "description": "Insert a new dentist",
+      "description": "Insert a new doctor",
       "authRoute" : true,
       "request_fields": {
         "firstName": {
@@ -113,12 +113,12 @@
       }
     },
     "put": {
-      "uri": "dentist/%d",
+      "uri": "doctor/%d",
       "method": "PUT",
-      "description": "Update dentist by id",
+      "description": "Update doctor by id",
       "authRoute" : true,
       "uri_parameters": {
-        "dentistId": {
+        "doctorId": {
           "type": "integer"
         }
       },
@@ -135,12 +135,12 @@
       }
     },
     "delete": {
-      "uri": "dentist/%d",
+      "uri": "doctor/%d",
       "method": "DELETE",
-      "description": "Delete dentist by id",
+      "description": "Delete doctor by id",
       "authRoute" : true,
       "uri_parameters": {
-        "dentistId": {
+        "doctorId": {
           "type": "integer"
         }
       }
@@ -306,7 +306,7 @@
         }
       },
       "request_fields": {
-        "idDentist": {
+        "idDoctor": {
           "type": "integer"
         },
         "idPatient": {

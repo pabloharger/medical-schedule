@@ -1,47 +1,46 @@
 <?php
 
-use \HOdonto\Model\Patient;
+use \HOdonto\Model\Doctor;
 use Slim\Routing\RouteCollectorProxy;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-$app->group('/patient', function (RouteCollectorProxy $group) {
+$app->group('/doctor', function (RouteCollectorProxy $group) {
 
   $group->get('/{id}', function(Request $request, Response $response, $args){
-    $patient = new Patient();
-    echo json_encode($patient->get((int)$args['id']));
+    $doctor = new Doctor();
+    echo json_encode($doctor->get((int)$args['id']));
     return $response;
   });
 
   $group->post('/', function(Request $request, Response $response, $args){
-    $patient = new Patient();
+    $doctor = new Doctor();
 
-    $patient->setValues($_POST);
-
-    echo json_encode($patient->post());
+    $doctor->setValues($_POST);
+    echo json_encode($doctor->post());
     return $response;
   });
 
   $group->put('/{id}', function(Request $request, Response $response, $args){
     parse_str(file_get_contents("php://input"), $PUT);
-    $patient = new Patient();
+    $doctor = new Doctor();
 
     if (!isset($args['id'])) {
-      $patient->setcode(1);
-      $patient->setmessage('Incorrect argument "id".');
-      echo json_encode($patient->getValues());
+      $doctor->setcode(1);
+      $doctor->setmessage('Incorrect argument "id".');
+      echo json_encode($doctor->getValues());
       return $response;
     }
 
-    $patient->setValues($PUT);
-    $patient->put($args['id']);
+    $doctor->setValues($PUT);
+    $doctor->put($args['id']);
 
-    echo json_encode($patient->getValues());
+    echo json_encode($doctor->getValues());
     return $response;
   });
 
   $group->delete('/{id}', function(Request $request, Response $response, $args){
-    $doctor = new Patient();
+    $doctor = new Doctor();
 
     if (!isset($args['id'])) {
       $doctor->setcode(1);

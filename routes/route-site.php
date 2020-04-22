@@ -37,10 +37,10 @@ $app->group('', function (RouteCollectorProxy $group) {
     return $response;
   });
 
-  $group->get('/dentist', function(Request $request, Response $response, $args){
+  $group->get('/doctor', function(Request $request, Response $response, $args){
     User::verifySignIn();
     $page = new Page();
-    $page->setTpl('dentist');
+    $page->setTpl('doctor');
     return $response;
   });
 

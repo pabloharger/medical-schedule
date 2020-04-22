@@ -1,7 +1,8 @@
 {
+  "header_title": "Agenda",
   "header_clinicName": "Su Clinica",
 
-  "header_menu_dentist": "Dentista",
+  "header_menu_doctor": "Doctor",
   "header_menu_patient": "Paciente",
   "header_menu_schedule": "Agenda",
   "header_menu_signOut": "Salir",
@@ -32,7 +33,7 @@
   "interface_waring_informPassword": "Ingrese su contraseña",
   "interface_waring_informFirstName": "Ingrese el nombre",
   "interface_waring_informLastName": "Ingrese el apellido",
-  "interface_waring_informDentist": "Ingrese el dentista",
+  "interface_waring_informDoctor": "Ingrese el doctor",
   "interface_waring_informPatient": "Ingrese el paciente",
   "interface_waring_informInitialTime": "Ingrese la hora inicial",
   "interface_waring_informFinalTime": "Ingrese la hora final",
@@ -41,7 +42,7 @@
   "interface_info_passwordHasBeenSentFollowInstructions": "¡Email enviado! Revise el email que te enviamos y siga las instrucciones",
   "interface_info_passwordChangedSuccessfully": "La contraseña ha cambiado con éxito",
   "interface_info_accountActivatedSuccessfully": "Su cuenta se ha activado con éxito",
-  "interface_info_dentistSaved": "Dentista guardado",
+  "interface_info_doctorSaved": "Doctor guardado",
   "interface_info_patientSaved": "Paciente guardado",
   "interface_info_ScheduleSaved": "Horario guardado",
 
@@ -49,7 +50,7 @@
 
   "interface_resetPassowrd_redefinePassword": "Restablece tu contraseña",
 
-  "interface_dentist_selectADentist": "Seleccione um dentista",
+  "interface_doctor_selectADoctor": "Seleccione um doctor",
 
   "interface_patient_phoneNumber": "Telefono",
   "interface_patient_mobileNumber": "Celular",

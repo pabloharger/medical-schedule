@@ -1,18 +1,18 @@
 (function(){
   'use strinct';
 
-  var appDentist = (function appDentistController(){
-    var appDescription = 'Dentist';
-    var $selDentist = $('[data-js="dentist-sel-dentist"]');
-    var $btnSave = $('[data-js="dentist-btn-save"]');
-    var $btnNew  = $('[data-js="dentist-btn-new"]');
-    var $btnDel = $('[data-js="dentist-btn-del"]');
-    var $btnCls = $('[data-js="dentist-btn-clear"]');
-    var $formMain = $('[data-js="dentist-form-main"]');
+  var appDoctor = (function appDoctorController(){
+    var appDescription = 'Doctor';
+    var $selDoctor = $('[data-js="doctor-sel-doctor"]');
+    var $btnSave = $('[data-js="doctor-btn-save"]');
+    var $btnNew  = $('[data-js="doctor-btn-new"]');
+    var $btnDel = $('[data-js="doctor-btn-del"]');
+    var $btnCls = $('[data-js="doctor-btn-clear"]');
+    var $formMain = $('[data-js="doctor-form-main"]');
 
-    var $inpFirstName = $('[data-js="dentist-inp-firstName"]');
-    var $inpLastName = $('[data-js="dentist-inp-lastName"]');
-    var $inpDocNumber = $('[data-js="dentist-inp-doc-number"]');
+    var $inpFirstName = $('[data-js="doctor-inp-firstName"]');
+    var $inpLastName = $('[data-js="doctor-inp-lastName"]');
+    var $inpDocNumber = $('[data-js="doctor-inp-doc-number"]');
 
     function init(){
       initComponents();
@@ -22,10 +22,10 @@
     }
 
     function initComponents(){
-      $selDentist.select2({
+      $selDoctor.select2({
         ajax: {
           type : "GET",
-          url : "/lockup/dentist",
+          url : "/lockup/doctor",
           dataType : 'json',
           delay : 250,
           data : 
@@ -51,38 +51,38 @@
     }
 
     function addShortCut(){
-      utilForm.addCtrlShortCutArr($btnSave, 'S', false, saveDentist);
-      utilForm.addCtrlShortCutArr($btnNew, 'N', false, newDentist);
+      utilForm.addCtrlShortCutArr($btnSave, 'S', false, saveDoctor);
+      utilForm.addCtrlShortCutArr($btnNew, 'N', false, newDoctor);
       utilForm.addCtrlShortCutArr($btnCls, 'L', false, clearControls);
-      utilForm.addCtrlShortCutArr($btnDel, 'D', false, deleteDentist);
+      utilForm.addCtrlShortCutArr($btnDel, 'D', false, deleteDoctor);
     }
 
     function initEvents(){
-      $btnNew.on('click', newDentist);
-      $btnSave.on('click', saveDentist);
-      $btnDel.on('click', deleteDentist);
+      $btnNew.on('click', newDoctor);
+      $btnSave.on('click', saveDoctor);
+      $btnDel.on('click', deleteDoctor);
       $btnCls.on('click', clearControls);
-      $selDentist.on('select2:select', findDentist);
+      $selDoctor.on('select2:select', findDoctor);
     }
 
     function clearControls(){
-      $selDentist.val(null).trigger('change');
-      $('.dentist-input').val('');
+      $selDoctor.val(null).trigger('change');
+      $('.doctor-input').val('');
       $formMain.find('.is-invalid').removeClass('is-invalid');
       enableControls(false, false);
     }
 
     function enableControls(enable, newRegister){
-      $('.dentist-input').prop('disabled', !enable);
-      $selDentist.prop('disabled', enable);
+      $('.doctor-input').prop('disabled', !enable);
+      $selDoctor.prop('disabled', enable);
       $btnSave.prop('disabled', !enable);
       $btnNew.prop('disabled', enable);
       $btnDel.prop('disabled', !enable);
       if (newRegister) $btnDel.prop('disabled', true);
-      enable ? $inpFirstName.focus() : $selDentist.focus();
+      enable ? $inpFirstName.focus() : $selDoctor.focus();
     }
 
-    function newDentist(){
+    function newDoctor(){
       clearControls();
       enableControls(true, true);
     }
@@ -111,14 +111,14 @@
       return validateFirstName() && validateLastName();
     }
 
-    function saveDentist(){
+    function saveDoctor(){
 
       const callBack = (data) => {
         var result = JSON.parse(data);
         if (result.code === 0) {
           //loading_off();
           util.message(appDescription, result.message);
-          setSelectDentist(result.id, $inpFirstName.val());
+          setSelectDoctor(result.id, $inpFirstName.val());
           enableControls(true, false);
         } else {
           //loading_off();
@@ -128,11 +128,11 @@
 
     //loading_on();
       if (validateForm()){
-        $route = '/dentist/';
+        $route = '/doctor/';
         $method = 'POST';
 
-        if ($selDentist.val() > 0) {
-          $route += $selDentist.val();
+        if ($selDoctor.val() > 0) {
+          $route += $selDoctor.val();
           $method = 'PUT';
         }
 
@@ -140,7 +140,7 @@
           url: $route,
           type: $method,
           data: {
-            id: $selDentist.val(),
+            id: $selDoctor.val(),
             firstName : $inpFirstName.val(),
             lastName: $inpLastName.val(),
             docNumber : $inpDocNumber.val()},
@@ -152,7 +152,7 @@
       }
     }
 
-    function deleteDentist(){
+    function deleteDoctor(){
       const callBack = (data) => {
         var result = JSON.parse(data);
         if (result.code === 0) {
@@ -165,10 +165,10 @@
         }
       }
 
-      if (confirm('Are you sure delete the dentist?')){
+      if (confirm('Are you sure delete the doctor?')){
         //loading_on();
         $.ajax({
-          url: '/dentist/' + Number($selDentist.val()),
+          url: '/doctor/' + Number($selDoctor.val()),
           type: 'DELETE',
           success: callBack,
           error: callBack
@@ -176,12 +176,12 @@
       }
     }
 
-    function findDentist(){
-      var idDentist = Number($selDentist.val());
+    function findDoctor(){
+      var idDoctor = Number($selDoctor.val());
       
       //loading_on();
       $.get(
-        '/dentist/' + idDentist,
+        '/doctor/' + idDoctor,
         function(data) {
           var result = JSON.parse(data);
           if (result.code === 0) {
@@ -198,8 +198,8 @@
       );
     }
 
-    function setSelectDentist(id, name){
-      utilForm.setSelect2($selDentist, id, name);
+    function setSelectDoctor(id, name){
+      utilForm.setSelect2($selDoctor, id, name);
     }
 
     return {
@@ -208,6 +208,6 @@
     }
   })();
 
-  appDentist.init();
-  window.appDentist = appDentist;
+  appDoctor.init();
+  window.appDoctor = appDoctor;
 })();

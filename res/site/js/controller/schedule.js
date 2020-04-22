@@ -4,7 +4,7 @@
     var $schedule = $('[data-js="schedule-schedule"]');
     var $scheduleDialog = $('[data-js="schedule-dialog"]');
     var $inpId = $('[data-js="schedule-inp-id"]');
-    var $selDentist = $('[data-js="schedule-sel-dentist"]');
+    var $selDoctor = $('[data-js="schedule-sel-doctor"]');
     var $selPatient = $('[data-js="schedule-sel-patient"]');
     var $inpTimeInit = $('[data-js="schedule-inp-date-initial"]');
     var $inpTimeFinal = $('[data-js="schedule-inp-date-final"]');
@@ -40,10 +40,10 @@
         locale: utilCookie.getCookie('langInitials')
       });
 
-      $selDentist.select2({
+      $selDoctor.select2({
         ajax: {
           type : "GET",
-          url : "/lockup/dentist",
+          url : "/lockup/doctor",
           dataType : 'json',
           delay : 250,
           data : 
@@ -114,7 +114,7 @@
         }
       );
 
-      // $selDentist.select2.defaults.set('language', utilCookie.getCookie('langInitials'));
+      // $selDoctor.select2.defaults.set('language', utilCookie.getCookie('langInitials'));
       // $selPatient.select2.defaults.set('language', utilCookie.getCookie('langInitials'));
 
       $inpTimeInit.datetimepicker({format: 'DD/MM/YYYY HH:mm'});
@@ -155,13 +155,13 @@
       }
     }
 
-    function validateDentist(){
-      if (Number($selDentist.val()) === 0){
-        utilDOM.addClassIfNotExists($selDentist, 'is-invalid');
+    function validateDoctor(){
+      if (Number($selDoctor.val()) === 0){
+        utilDOM.addClassIfNotExists($selDoctor, 'is-invalid');
         return false;
       }
       
-      $selDentist.removeClass('is-invalid');
+      $selDoctor.removeClass('is-invalid');
       return true;
     }
 
@@ -201,7 +201,7 @@
     }
 
     function validateData(){
-      var validate = validateDentist();
+      var validate = validateDoctor();
       validate = validatePatient() && validate;
       validate = validateTimeInitial () && validateTimeFinal() && validate;
 
@@ -216,8 +216,8 @@
           $inpId.val(result.id);
           addCalendarSchedule({
             id: result.id,
-            dentist: {
-              firstName: result.dentist.firstName
+            doctor: {
+              firstName: result.doctor.firstName
             },
             patient: {
               firstName: result.patient.firstName
@@ -247,7 +247,7 @@
         type: $method,
         data: {
           id : Number($inpId.val()),
-          idDentist : $selDentist.val(),
+          idDoctor : $selDoctor.val(),
           idPatient : $selPatient.val(),
           dateTimeBegin : utilMoment.getInternalFormatedDateTime($inpTimeInit.val()),
           dateTimeEnd : utilMoment.getInternalFormatedDateTime($inpTimeFinal.val()),
@@ -279,7 +279,7 @@
       return {
           id : event.id,
           title : 
-            'Dr. ' + event.dentist.firstName + '\n' +
+            'Dr. ' + event.doctor.firstName + '\n' +
             event.patient.firstName  + '\n' +
             (event.observation === null ? '': event.observation),
           start : event.dateTimeBegin,
@@ -325,7 +325,7 @@
           if (result.code == 0) {
             //loading_off();
             $inpId.val(result.id);
-            utilForm.setSelect2($selDentist, result.dentist.id, result.dentist.firstName);
+            utilForm.setSelect2($selDoctor, result.doctor.id, result.doctor.firstName);
             utilForm.setSelect2($selPatient, result.patient.id, result.patient.firstName);
             $inpTimeInit.val(utilMoment.getInterfaceFormatedDateTime(result.dateTimeBegin));
             $inpTimeFinal.val(utilMoment.getInterfaceFormatedDateTime(result.dateTimeEnd));

@@ -5,12 +5,12 @@ namespace HOdonto\Model;
 use \HOdonto\Model\Model;
 use \HOdonto\API\Api;
 
-class Dentist extends Model
+class Doctor extends Model
 {
 
   public static function lockUp($search)
   {
-    $res = Api::run(Api::getRoutes()->dentist->get, ['firstName' => [ '$substring' => $search ]]);
+    $res = Api::run(Api::getRoutes()->doctor->get, ['firstName' => [ '$substring' => $search ]]);
 
     if ($res['status']['code'] == 200) {
       $data = Array();
@@ -28,9 +28,9 @@ class Dentist extends Model
     return json_encode($data);
   }
 
-  public function get($idDentist)
+  public function get($idDoctor)
   {
-    $res = Api::run(Api::formatRouteUri(Api::getRoutes()->dentist->getId, $idDentist));
+    $res = Api::run(Api::formatRouteUri(Api::getRoutes()->doctor->getId, $idDoctor));
 
     $this->setcode(0);
     if ($res['status']['code'] == 200) {
@@ -46,11 +46,11 @@ class Dentist extends Model
   {
     $data = $this->getvalues();
     unset($data['id']);
-    $res = Api::run(Api::getRoutes()->dentist->post, $data);
+    $res = Api::run(Api::getRoutes()->doctor->post, $data);
 
     if ($res['status']['code'] == 201) {
       $this->setcode(0);
-      $this->setmessage(L('interface_info_dentistSaved'));
+      $this->setmessage(L('interface_info_doctorSaved'));
       $this->setValues($res['response']);
     } else {
       $this->setcode(1);
@@ -61,11 +61,11 @@ class Dentist extends Model
 
   public function put()
   {
-    $res = Api::run(Api::formatRouteUri(Api::getRoutes()->dentist->put, (int)$this->getid()), $this->getvalues());
+    $res = Api::run(Api::formatRouteUri(Api::getRoutes()->doctor->put, (int)$this->getid()), $this->getvalues());
 
     if ($res['status']['code'] == 201) {
       $this->setcode(0);
-      $this->setmessage(L('interface_info_dentistSaved'));
+      $this->setmessage(L('interface_info_doctorSaved'));
     } else {
       $this->setcode(1);
       $this->setmessage($res['status']['message']);
@@ -73,9 +73,9 @@ class Dentist extends Model
     return $this->getValues();
   }
 
-  public function delete($idDentist)
+  public function delete($idDoctor)
   {
-    Api::run(Api::formatRouteUri(Api::getRoutes()->dentist->delete, $idDentist));
+    Api::run(Api::formatRouteUri(Api::getRoutes()->doctor->delete, $idDoctor));
   }
 
 }

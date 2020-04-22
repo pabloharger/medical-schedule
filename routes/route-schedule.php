@@ -25,8 +25,8 @@ $app->group('/schedule', function (RouteCollectorProxy $group) {
     if (!isset($_POST['id'])) $_POST['id'] = 0;
 
     try {
-      if (!isset($_POST['idDentist']) || (int)$_POST['idDentist'] === 0){
-        throw new Exception(L('interface_waring_informDentist'));
+      if (!isset($_POST['idDoctor']) || (int)$_POST['idDoctor'] === 0){
+        throw new Exception(L('interface_waring_informDoctor'));
       }
 
       if (!isset($_POST['idPatient']) || (int)$_POST['idPatient'] === 0){
@@ -81,7 +81,7 @@ $app->group('/schedule', function (RouteCollectorProxy $group) {
     
     $schedule->delete((int)$args['id']);
     $schedule->setcode(0);
-    $schedule->setmessage('Dentist deleted!');
+    $schedule->setmessage('Doctor deleted!');
     echo json_encode($schedule->getValues());
     return $response;
   });
