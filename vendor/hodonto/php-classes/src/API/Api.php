@@ -26,6 +26,8 @@ class Api
       ),
     );
 
+    var_dump($params);exit;
+
     // Add post fields if it's necessary
     if ($data) $params[CURLOPT_POSTFIELDS] = json_encode($data);
 
