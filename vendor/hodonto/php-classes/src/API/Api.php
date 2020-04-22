@@ -29,6 +29,8 @@ class Api
     // Add post fields if it's necessary
     if ($data) $params[CURLOPT_POSTFIELDS] = json_encode($data);
 
+    echo json_encode($params);exit;
+
     curl_setopt_array($curl, $params);
 
     $response = json_decode(curl_exec($curl), true);
