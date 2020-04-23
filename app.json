@@ -1,7 +1,7 @@
 {
   "name": "PHP Medical Schedule",
   "description": "A CRUD demo app made in PHP using API",
-  "repository": "https://github.com/pabloharger/hodonto",
+  "repository": "https://github.com/pabloharger/medical-schedule",
   "logo": "https://avatars2.githubusercontent.com/u/8269931?s=460&u=fd0212df0339f495a62597824a1a81c99ef7405f&v=4",
   "keywords": ["PHP", "SlimFramework", "API"]
 }

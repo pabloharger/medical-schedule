@@ -1,5 +1,4 @@
-# hodonto
-PHP Medical Schedule
+# PHP Medical Schedule
 
 CRUD made with PHP
 
