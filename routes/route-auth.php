@@ -64,7 +64,7 @@ $app->group('', function (RouteCollectorProxy $group) {
       try {
         $user = new User();
         $user->setValues($_POST);
-        $user->post();
+        $user->signUp();
         User::setInfo(L('interface_info_userHasBeenRegistered'));
       } catch(Exception $e) {
         User::setError($e->getMessage());

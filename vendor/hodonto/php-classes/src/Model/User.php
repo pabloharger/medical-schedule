@@ -30,9 +30,9 @@ class User extends Model {
     return $this->getValues();
   }
 
-  public function post()
+  public function signUp()
   {
-    $res = Api::run(Api::getRoutes()->user->post, $this->getValues());
+    $res = Api::run(Api::getRoutes()->auth->signUp, $this->getValues());
     if ($res['status']['code'] !== 201) throw new \Exception($res['status']['message']);
     $this->setValues($res['response']);
   }
