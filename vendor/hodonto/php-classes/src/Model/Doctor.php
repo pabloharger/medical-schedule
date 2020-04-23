@@ -28,9 +28,9 @@ class Doctor extends Model
     return json_encode($data);
   }
 
-  public function get($idDoctor)
+  public function get($doctorId)
   {
-    $res = Api::run(Api::formatRouteUri(Api::getRoutes()->doctor->getId, $idDoctor));
+    $res = Api::run(Api::formatRouteUri(Api::getRoutes()->doctor->getId, $doctorId));
 
     $this->setcode(0);
     if ($res['status']['code'] == 200) {
@@ -73,9 +73,9 @@ class Doctor extends Model
     return $this->getValues();
   }
 
-  public function delete($idDoctor)
+  public function delete($doctorId)
   {
-    Api::run(Api::formatRouteUri(Api::getRoutes()->doctor->delete, $idDoctor));
+    Api::run(Api::formatRouteUri(Api::getRoutes()->doctor->delete, $doctorId));
   }
 
 }

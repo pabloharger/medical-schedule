@@ -245,8 +245,8 @@
         type: $method,
         data: {
           id : Number($inpId.val()),
-          idDoctor : $selDoctor.val(),
-          idPatient : $selPatient.val(),
+          doctorId : $selDoctor.val(),
+          patientId : $selPatient.val(),
           dateTimeBegin : utilMoment.getInternalFormatedDateTime($inpTimeInit.val()),
           dateTimeEnd : utilMoment.getInternalFormatedDateTime($inpTimeFinal.val()),
           observation : $inpObservation.val().trim()

@@ -179,11 +179,11 @@
     }
 
     function findDoctor(){
-      var idDoctor = Number($selDoctor.val());
+      var doctorId = Number($selDoctor.val());
       
       //loading_on();
       $.get(
-        '/doctor/' + idDoctor,
+        '/doctor/' + doctorId,
         function(data) {
           var result = JSON.parse(data);
           if (result.code === 0) {

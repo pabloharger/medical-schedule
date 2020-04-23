@@ -45,7 +45,6 @@
   "interface_info_accountActivatedSuccessfully": "Su cuenta se ha activado con éxito",
   "interface_info_doctorSaved": "Doctor guardado",
   "interface_info_patientSaved": "Paciente guardado",
-  "interface_info_ScheduleSaved": "Horario guardado",
   "interface_info_doctorDeleted": "Doctor apagado",
   "interface_info_patientDeleted": "Paciente apagado",
   "interface_info_ScheduleDeleted": "Horario apagado",

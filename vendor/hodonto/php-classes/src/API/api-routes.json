@@ -306,10 +306,10 @@
         }
       },
       "request_fields": {
-        "idDoctor": {
+        "doctorId": {
           "type": "integer"
         },
-        "idPatient": {
+        "patientId": {
           "type": "integer"
         },
         "dateTimeBegin": {

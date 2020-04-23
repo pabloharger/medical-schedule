@@ -46,7 +46,6 @@
   "interface_info_accountActivatedSuccessfully": "your account has been activated successfully",
   "interface_info_doctorSaved": "Doctor saved",
   "interface_info_patientSaved": "Patient saved",
-  "interface_info_ScheduleSaved": "Schedule saved",
   "interface_info_doctorDeleted": "Doctor deleted",
   "interface_info_patientDeleted": "Patient deleted",
   "interface_info_ScheduleDeleted": "Schedule deleted",

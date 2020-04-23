@@ -25,11 +25,11 @@ $app->group('/schedule', function (RouteCollectorProxy $group) {
     if (!isset($_POST['id'])) $_POST['id'] = 0;
 
     try {
-      if (!isset($_POST['idDoctor']) || (int)$_POST['idDoctor'] === 0){
+      if (!isset($_POST['doctorId']) || (int)$_POST['doctorId'] === 0){
         throw new Exception(L('interface_waring_informDoctor'));
       }
 
-      if (!isset($_POST['idPatient']) || (int)$_POST['idPatient'] === 0){
+      if (!isset($_POST['patientId']) || (int)$_POST['patientId'] === 0){
         throw new Exception(L('interface_waring_informPatient'));
       }
 

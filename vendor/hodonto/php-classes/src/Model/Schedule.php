@@ -52,7 +52,6 @@ class Schedule extends Model
 
     if ($res['status']['code'] == 201) {
       $this->setcode(0);
-      $this->setmessage(L('interface_info_scheduleSaved'));
       $this->setValues($res['response']);
     } else {
       $this->setcode(1);
@@ -73,7 +72,6 @@ class Schedule extends Model
 
     if ($res['status']['code'] == 201) {
       $this->setcode(0);
-      $this->setmessage(L('interface_info_scheduleSaved'));
       $this->setValues($res['response']);
     } else {
       $this->setcode(1);
