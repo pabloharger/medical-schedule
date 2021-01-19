@@ -4,6 +4,9 @@ CRUD made with PHP
 
 using Slim micro framework and Rain.TPL
 
+### Run the demo ###
+https://medical-schedule.herokuapp.com/
+
 #### Configure env variable
 
 rename the file .ENV_SAMPLE to .ENV and fill the variables
